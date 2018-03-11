@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ShareMyBook</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png"/>
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+     <script src="/ui/book_view.js">
+     </script>
+<link rel="stylesheet" href="/ui/style.css">
+  </head>
+  <body>
+    <div class="ui padded stackable grid">
+      <div class="black column">
+        <div class="ui segments">
+          <div class="ui left floated inverted segment">
+            <img src="../smblogo2.PNG" alt="Logo">
+          </div>
+          <!--Top Right Menu-->
+          <div class=" ui right floated inverted segment">
+            <div class="ui icon top right pointing dropdown button">
+              <i class="big align justify icon"></i>
+              <div class="menu">
+                <div class="item"><i class="large user icon"></i><a class="header">My Account</a></div>
+                <div class="item"><i class="large bookmark icon"></i><a class="header">My Wishlist</a></div>
+                <div class="item"><i class="large book icon"></i><a>My Books for Sale</a></div>
+                <div class="item"><i class="large sign out alternate icon"></i><a>Logout</a></div>
+                <div class="ui section divider"></div>
+                <div class="ui red header">Welcome to our Online Store</div>
+                <div class="ui section divider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui stackable grid">
+      <div class="three wide column computer only"></div>
+      <div class="ui ten wide column">
+        <div class="ui raised padded segment">
+  <form class="ui form" method="post" action="/template">
+    <h3>
+      BOOK DETAILS:
+    </h3>
+    <div class="ui divider"></div>
+    <p>Terms and Conditions: <br>
+    1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
+    2.The resale value cannot be more than 40% of MRP.</p>
+    <div class="ui divider"></div>
+    <div class="part1">
+          <label class="ui inverted teal label">Book Name</label><br>
+          <input class="ui seven wide field" type="text" name="Bookname" placeholder="Book Name"><br><br>
+          <label class="ui inverted teal label">Author</label><br>
+          <input class="seven wide field" type="text" name="Author" placeholder="Author"><br><br>
+          <label class="ui teal label">MRP</label><br>
+          <input class="ui seven wide field" type="number" name="mrp" placeholder="MRP"><br><br>
+          <label class="ui teal label">Selling Price</label><br>
+          <input class="ui seven wide field" type="number" name="sp" placeholder="Selling Price"><br><br>
+          <button class="ui teal labeled icon button"><i class="angle right icon"></i>Next</button><br>
+
+    </div>
+<!--  <div class="part3" style="display:none">
+    <h3>
+      BOOK DETAILS:
+    </h3>
+    <div class="ui divider"></div>
+    <p>Terms and Conditions: <br>
+    1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
+    2.The resale value cannot be more than 40% of MRP.</p>
+    <label class="ui inverted teal label">Upload Front Cover of Your Book</label><br>
+  <input class="seven wide field" type='file' name="Bookcover" accept="image/*" onchange="readURL(this);"  />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img id="uploadimg" src="http://via.placeholder.com/200x200" alt="your image" /><br><br>
+    <button class="ui teal labeled icon button"  onclick="partmanager('part3','part2')"><i class="angle left icon"></i>Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="ui teal labeled icon button" tabindex="0"><i class="sign in icon"></i>
+    Submit</button>
+  </div>-->
+<br>
+  <br>
+  </form><br>
+</div>
+</div>
+<div class="three wide column computer only"></div>
+</div>
+    <!--footer-->
+    <div class="ui inverted vertical footer segment form-page">
+      <div class="ui container">
+    <i class="copyright outline icon"></i> 2018 ShareMyBook. All Rights Reserved.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>About us</a>&emsp;&emsp;<a> Contact us</a>
+      </div>
+    </div>
+    </body>
+    <script>
+          $('.ui.dropdown.seven.wide.field').dropdown();
+      $('.ui.rating').rating('setting', 'onRate', function(value) {
+      $('#Starrating').attr("value",value);
+      });
+
+            function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#uploadimg')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(200);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+  $('.ui.form')
+  .form({
+  fields: {
+  Bookname  : 'empty',
+  mrp :'empty',
+  sp :'empty',
+  Author     :'empty',
+  Bookcover     :'empty',
+  Booktype  :'empty',
+  Language  :'empty',
+  Category  :'empty'
+  }
+  })
+  ;
+  </script>
+  <script type="text/javascript">
+    function partmanager(hide,show){
+      var qs=document.querySelectorAll('.'+hide);
+      if(qs[0]){
+        qs[0].style.display='none';
+      }
+      document.querySelector('.'+show).style.display='block';
+    }
+    $('.ui.dropdown').dropdown({on: 'click'});
+    $('.ui.icon.button').popup({on: 'click'});
+  </script>
+</html>
