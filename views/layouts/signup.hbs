@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>Hello Signup page</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<style>
+.col-md-4{
+background-color: black;
+
+}
+.col-md-8{
+background-color: teal;
+}
+</style>
+</head>
+<body>
+  <div class="container-fluid">
+      <div class='row'>
+      <div class="col-md-4">
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <img src="/images/smblogo2.png" alt="ShareMyBook">
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+          <h2 style="color:white;">Register</h2>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p  style="color:blue;">A single account with many benefits. Register here to start your journey</p>
+          <form action="/" method="get">
+            <input type="submit" value="Already have an account?" class="btn btn-success  col-md-offset-3"></input>
+          </form>
+      </div>
+      <div class="col-md-8">
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+          <form role="form" class="form-horizontal">
+              <div class="form-group">
+                      <label for="fullname" class="control-label col-md-3"  style="color:white;">Full Name:</label>
+                      <div class="col-md-6">
+                          <input type="name" class="form-control" name="fullname" id="fullname" placeholder="Full Name" />
+                      </div>
+                  </div>
+              <div class="form-group">
+                      <label for="username" class="control-label col-md-3"  style="color:white;">Username:</label>
+                      <div class="col-md-6">
+                          <input type="name" class="form-control" name="username" id="username" placeholder="username" />
+                      </div>
+                  </div>
+          <div class="form-group">
+              <label for="email" class="control-label col-md-3"  style="color:white;">Email:</label>
+              <div class="col-md-6">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" />
+              </div>
+          </div>
+          <div class="form-group">
+                  <label for="contact_no" class="control-label col-md-3"  style="color:white;">Contact No.(Optional):</label>
+                  <div class="col-md-6">
+                      <input type="number" class="form-control" name="contact_no" id="contact_no" placeholder="Contact Number" />
+                  </div>
+              </div>
+          <div class="form-group">
+                  <label for="password" class="control-label col-md-3"  style="color:white;">Password:</label>
+                  <div class="col-md-6">
+                  <input type="password" class="form-control" id="password" placeholder="Password" />
+               </div>
+              </div>
+
+          <div class="form-group">
+                  <label for="address" class="control-label col-md-3"  style="color:white;">Address:</label>
+                  <div class="col-md-6">
+                  <input type="text" class="form-control" id="address" placeholder="Address" />
+               </div>
+              </div>
+          <div class="form-group">
+              <button type="button" onclick="ajaxquery()" id="register" class="btn btn-success col-md-3 col-md-offset-3">Register</button>
+          </div>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+      </form>
+      </div>
+      </div>
+  </div>
+</body>
+<script type="text/javascript">
+
+var ajaxquery = function(){
+  var username = document.getElementById("username").value;
+  var fullname = document.getElementById("fullname").value;
+  var password = document.getElementById("password").value;
+  var contact_no = document.getElementById("contact_no").value;
+  var email = document.getElementById("email").value;
+  var address = document.getElementById("address").value;
+  var data = JSON.stringify({
+    "fullname":fullname,
+    "username": username,
+    "email": email,
+    "contact_no": contact_no,
+    "address": address,
+    "password": password
+  });
+
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === 4) {
+      console.log(this.responseText);
+      window.location.href = '/index';
+    }
+  });
+
+  xhr.open("POST", "/auth/register");
+  xhr.setRequestHeader("content-type", "application/json");
+  //xhr.setRequestHeader("cache-control", "no-cache");
+  //xhr.setRequestHeader("postman-token", "32f71b1f-1715-a641-accf-332f1262026b");
+
+  xhr.send(data);
+}
+</script>
+</html>

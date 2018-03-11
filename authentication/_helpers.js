@@ -22,8 +22,8 @@ function createUser (req,res) {
   const salt = bcrypt.genSaltSync();
   const hash = bcrypt.hashSync(req.body.password, salt);
   //console.log(req.body);
-  return (db.one('Insert into account_info (username,email,contact_no,address,password) values($1,$2,$3,$4,$5) RETURNING *',
-  [req.body.username,req.body.email,req.body.contact_no,req.body.address,hash]))
+  return (db.one('Insert into account_info (fullname,username,email,contact_no,address,password) values($1,$2,$3,$4,$5,$6) RETURNING *',
+  [req.body.fullname,req.body.username,req.body.email,req.body.contact_no,req.body.address,hash]))
   })
   .catch((err) => {
     res.status(400).json({status: err.message});

@@ -39,10 +39,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 //app.use(flash());
 
-//app.use('/user', user);
 app.use('/book', book);
 app.use('/auth', auth);
-app.use('/user', user);
+app.use('/', user);
+
+app.red
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
