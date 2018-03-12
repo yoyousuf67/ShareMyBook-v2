@@ -1,38 +1,60 @@
 <html>
     <head>
-        <title>Hello Login Page</title>
+        <title>Login</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
        <style>
-       .col-md-4{background-color: black;}
-       .col-md-8{background-color: teal;}
+       .col-md-5, .container-fluid , .container{background-color: #151A22;}
+       .col-md-7{background-color:	#00A876;}
        </style>
     </head>
     <body>
+
         <div class="container-fluid">
-        <div class='row'>
-        <div class="col-md-4">
-            <p>&nbsp;</p> <p>&nbsp;</p>
-            <img src="/images/smblogo2.png" alt="ShareMyBook">
-            <p>&nbsp;</p> <p>&nbsp;</p>
-            <h2 style="color:white;">Welcome</h2>
+          <div class="container" style="display:{{display}};">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>{{title}}</strong> {{body}}
+            </div>
+          </div>
+        <div class="container-fluid">
+        <div class='border row'>
+          <div class="col-md-5">
             <p>&nbsp;</p>
             <p>&nbsp;</p>
-            <p  style="color:blue;">Register for an account on share my book web-application by clicking button below</p>
-            <form action="/register" method="get">
-              <input type="submit" value="Register Here" class="btn btn-success  col-md-offset-3"></input>
-            </form>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/smblogo2.png" alt="ShareMyBook">
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+              <div class="well-lg black  " style="color:gray" style="background-color:	#00A876;">
+                <h2 style="color:white;">Welcome</h2>
+              <h3 style="color:#4d5257">Register for SMB account here.</h3>
+              <p style="color:#4d5257">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <form action="/register" method="get">
+                <input class="btn btn-outline-light col-md-offset-3" type="submit" value="Register Here"/>
+              </form>
+          </div>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
+          <p>&nbsp;</p>                  <p>&nbsp;</p>
+                            <p>&nbsp;</p>                  <p>&nbsp;</p>
+                                              <p>&nbsp;</p>
+          <h2 style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Or login to your account</h2>
           <p>&nbsp;</p>
-          <h4 style="color:black;"> Or, login to your account</h4>
+          <p>&nbsp;</p>
             <form role="form" class="form-horizontal">
               <div class="form-group">
                 <label for="username" class="control-label col-md-3"  style="color:white;">Username:</label>
@@ -46,18 +68,21 @@
                   <input type="password" class="form-control" id="password" placeholder="Password" />
                   </div>
                 </div>
-            <div class="form-group">
-              <button type="button" onclick="ajaxquery()" class="btn btn-warning col-md-3 col-md-offset-3">Login</button>
-            </div>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+                <p>&nbsp;</p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="ajaxquery()"  class="btn btn-primary col-md-3 col-md-offset-3">login</button></p>
       </form>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>                  <p>&nbsp;</p>
+                        <p>&nbsp;</p>
     </div>
     </div>
     </div>
+  </div>
     <script type="text/javascript">
     var ajaxquery = function(){
       var username = document.getElementById("username").value;

@@ -8,6 +8,7 @@ var hbs = require('express-handlebars');
 var expressValidator= require('express-validator');
 var session=require('express-session');
 var passport = require('passport');
+var flash = require('connect-flash');
 
 var auth = require('./routes/auth');
 var book = require('./routes/book');
@@ -37,7 +38,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(flash());
+app.use(flash());
 
 app.use('/book', book);
 app.use('/auth', auth);

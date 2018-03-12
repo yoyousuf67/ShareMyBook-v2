@@ -3,20 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>ShareMyBook</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png"/>
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-     <script src="/ui/book_view.js">
+     <script src="/javascripts/book_view.js">
      </script>
-<link rel="stylesheet" href="/ui/style.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <div class="ui padded stackable grid">
       <div class="black column">
         <div class="ui segments">
           <div class="ui left floated inverted segment">
-            <img src="../smblogo2.PNG" alt="Logo">
+            <img src="/images/smblogo2.PNG" alt="Logo">
           </div>
           <!--Top Right Menu-->
           <div class=" ui right floated inverted segment">
@@ -51,7 +50,7 @@
 
           <div class="ui floating labeled teal icon dropdown button">
             <i class="cart arrow down icon"></i>
-            <span class="text">Cart(<span id="cartnum">0</span>)</span>
+            <span class="text">Cart(<span class="cartnum">0</span>)</span>
             <div class="menu">
               <div class="item">No items added to cart yet</div>
             </div>
@@ -127,7 +126,7 @@
             <div class=" column">
               <div class="ui floating labeled teal icon dropdown big button">
                 <i class="cart arrow down icon"></i>
-                <span class="text">Cart(<span id="cartnum">0</span>)</span>
+                <span class="text">Cart(<span class="cartnum">0</span>)</span>
                 <div class="menu">
                   <div class="item">No items added to cart yet</div>
                 </div>
@@ -144,14 +143,13 @@
       <div class="column">
           <div id="overlay" onmousemove="zoomIn(event)" style="display:none"></div>
           <div id="hide">
-            <span><h3 class="ui header">The Peacan Man</h3>by Author</span>
+            <span><h3 class="ui header">{{book.bookname}}</h3>by {{book.author}}</span>
             <div class="ui section divider"></div>
-            <h3 class="ui header"><span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span></h3>
+            <h3 class="ui header"><span class="discount">&#x20b9;{{book.sp}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;{{book.mrp}}</span></h3>
             <br>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+            {{book.description}}</div>
             <br>
-             <div class="ui teal button"><i class="cart plus icon"></i>Add to Cart</div>
+             <a class="ui teal button" onclick="add_to_cart({{book.book_id}})"><i class="cart plus icon"></i>Add to Cart</a>
              <div class="ui yellow button"><i class="bookmark icon"></i>Add to Wishlist</div>
       </div>
     </div>

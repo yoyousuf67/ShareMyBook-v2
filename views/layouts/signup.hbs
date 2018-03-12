@@ -1,88 +1,121 @@
 <html>
 <head>
-<title>Hello Signup page</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+<title>Register</title>
+<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<style>
-.col-md-4{
-background-color: black;
+<link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.min.css"/>
 
+    <!-- Include FontAwesome CSS if you want to use feedback icons provided by FontAwesome -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/fontawesome/4.1.0/css/font-awesome.min.css" />
+
+    <!-- BootstrapValidator CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css"/>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- BootstrapValidator JS -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.0/js/bootstrapValidator.min.js"></script>
+<style>
+.col-md-5 , .well-lg.black , .container-fluid , .container{
+    background-color: #151A22;
 }
-.col-md-8{
-background-color: teal;
+.col-md-7, .well-lg.green{
+    background-color:	#00A876;
 }
 </style>
 </head>
 <body>
   <div class="container-fluid">
-      <div class='row'>
-      <div class="col-md-4">
+    <div class="border row">
+      <div class="col-md-5">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/smblogo2.png" alt="ShareMyBook">
               <p>&nbsp;</p>
               <p>&nbsp;</p>
-              <img src="/images/smblogo2.png" alt="ShareMyBook">
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-          <h2 style="color:white;">Register</h2>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
-          <p  style="color:blue;">A single account with many benefits. Register here to start your journey</p>
+          <div class="well-lg black  " style="color:gray" style="background-color:	#00A876;">
+            <h2 style="color:white;">Register</h2>
+          <h3 style="color:#4d5257">A single account with many benefits.</h3>
+          <p style="color:#4d5257">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>&nbsp;</p>
           <form action="/" method="get">
-            <input type="submit" value="Already have an account?" class="btn btn-success  col-md-offset-3"></input>
+            <input class="btn btn-outline-light col-md-offset-3 " type="submit" value="Already have an account?"/>
           </form>
       </div>
-      <div class="col-md-8">
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+    </div>
+      <div class="col-md-7">
               <p>&nbsp;</p>
               <p>&nbsp;</p>
-          <form role="form" class="form-horizontal">
-              <div class="form-group">
-                      <label for="fullname" class="control-label col-md-3"  style="color:white;">Full Name:</label>
-                      <div class="col-md-6">
-                          <input type="name" class="form-control" name="fullname" id="fullname" placeholder="Full Name" />
-                      </div>
-                  </div>
-              <div class="form-group">
-                      <label for="username" class="control-label col-md-3"  style="color:white;">Username:</label>
-                      <div class="col-md-6">
-                          <input type="name" class="form-control" name="username" id="username" placeholder="username" />
-                      </div>
-                  </div>
-          <div class="form-group">
-              <label for="email" class="control-label col-md-3"  style="color:white;">Email:</label>
-              <div class="col-md-6">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" />
-              </div>
-          </div>
-          <div class="form-group">
-                  <label for="contact_no" class="control-label col-md-3"  style="color:white;">Contact No.(Optional):</label>
-                  <div class="col-md-6">
-                      <input type="number" class="form-control" name="contact_no" id="contact_no" placeholder="Contact Number" />
-                  </div>
-              </div>
-          <div class="form-group">
-                  <label for="password" class="control-label col-md-3"  style="color:white;">Password:</label>
-                  <div class="col-md-6">
-                  <input type="password" class="form-control" id="password" placeholder="Password" />
-               </div>
-              </div>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p><p>&nbsp;</p>
+              <div class="well-lg green">
+          <form role="form" class="form-horizontal" id="registration-form" class="form-horizontal">
+            <div class="form-group">
+            <h3>&nbsp;&nbsp;&nbsp;&nbsp;Personal Info:</h3>
+            </div>
 
-          <div class="form-group">
-                  <label for="address" class="control-label col-md-3"  style="color:white;">Address:</label>
-                  <div class="col-md-6">
-                  <input type="text" class="form-control" id="address" placeholder="Address" />
-               </div>
+            <div class="form-group">
+              <label for="name" class="control-label col-md-3"  style="color:white;">Full Name:</label>
+              <div class="col-md-6">
+                  <input type="name" class="form-control" name="fullname" id="fullname" placeholder="Name" />
               </div>
-          <div class="form-group">
-              <button type="button" onclick="ajaxquery()" id="register" class="btn btn-success col-md-3 col-md-offset-3">Register</button>
           </div>
+  <div class="form-group has-error">
+          <label for="number" class="control-label col-md-3"  style="color:white;">Contact No. (Optional):</label>
+          <div class="col-md-6">
+              <input type="number" class="form-control" name="contact_no" id="contact_no" placeholder="Contact No." />
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="textarea" class="control-label col-md-3"  style="color:white;">Address:</label>
+          <div class="col-md-6">
+          <textarea class="form-control" id="address" name="address" rows="4" placeholder="Address Field" ></textarea>
+        </div>
+        </div>
+        <div class="form-group">
+          <h3>&nbsp;&nbsp;&nbsp;&nbsp;Account Info:</h3>
+        </div>
+        <div class="form-group">
+                <label for="name" class="control-label col-md-3"  style="color:white;">Username:</label>
+                <div class="col-md-6">
+                    <input type="name" class="form-control" name="username" id="username" placeholder="Username" />
+                </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="email" class="control-label col-md-3"  style="color:white;">Email:</label>
+                <div class="col-md-6">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" />
+                </div>
+            </div>
+            <div class="form-group has-error">
+                      <label for="password" class="control-label col-md-3"  style="color:white;">Password:</label>
+                      <div class="col-md-6">
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                 </div>
+              </div>
+            <div class="form-group has-error">
+                <label for="password" class="control-label col-md-3"  style="color:white;">Confirm Password:</label>
+                  <div class="col-md-6">
+                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" />
+                 </div>
+                </div>
+
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary col-md-3 col-md-offset-3">Register</button></p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
-          <p>&nbsp;</p>
+          <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
       </form>
       </div>
       </div>
   </div>
+</div>
 </body>
 <script type="text/javascript">
 
@@ -108,7 +141,12 @@ var ajaxquery = function(){
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === 4) {
       console.log(this.responseText);
-      window.location.href = '/index';
+      if (this.status==200) {
+        window.location.href = '/';
+      }
+      else {
+        window.location.href = '/success'
+      }
     }
   });
 
@@ -120,4 +158,124 @@ var ajaxquery = function(){
   xhr.send(data);
 }
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var validator=$("#registration-form").bootstrapValidator({
+            framework:"bootstrap",
+            feedbackIcons:{
+                valid:" glyphicon glyphicon-ok",
+                invalid:" glyphicon glyphicon-remove",
+                validating:"glyphicon glyphicon-refresh"
+
+
+            },
+        fields:{
+            fullname: {
+                validators : {
+                    notEmpty : {
+                        message: "*Full name  is required",
+                    },
+                    stringLength : {
+                        min:3,
+                    }
+                }
+            },
+            username: {
+                validators : {
+                    notEmpty : {
+                        message: "*Username is required",
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: '*The username can not contain spaces'
+                    },
+                    stringLength : {
+                        min:4,
+                        message: "*Username must be more than 4 and less than 15 characters long"
+                    }
+                }
+            },
+            email:{
+                message: "*Email address is required",
+                validators : {
+                    notEmpty : {
+                        message: "*Please provide an email address",
+
+                    }
+                }
+            },
+            contact_no: {
+                validators : {
+
+                        message:"*Please supply a valid phone number"						,
+                    stringLength : {
+                        min:10,
+						max:10,
+                        message: "*Please enter a valid phone number of ten digits"
+                    }
+
+
+                }
+            },
+            address: {
+                validators : {
+                    notEmpty : {
+                        message: "*Address is required",
+                    },
+                    stringLength : {
+                        min:8,
+                    }
+                }
+            },
+
+            password: {
+                validators : {
+                    notEmpty : {
+                        message: "*Password is required",
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9]+$/,
+                        message: '*The password can only consist of alphabets and numbers'
+                    },
+                    stringLength : {
+                        min:6,
+                        max:20,
+                        message: "*Password must be more than 6 and less than 20 characters long"
+                    }
+                }
+            },
+            confirmpassword: {
+                validators : {
+                    notEmpty : {
+                        message: "*Confirm Password field is required",
+                    },
+                    identical: {
+                        field: "password",
+                        message : "*Passwords should match"
+                    }
+                }
+             }
+
+        }
+
+        });
+
+        validator.on("success.form.bv", function (e) {
+      $('#success_message').slideDown({ opacity:"show"},"slow")
+      $('#registration-form').data('bootstrapValidator').resetForm();
+
+                 // Prevent form submission
+                 e.preventDefault();
+
+                 // Get the form instance
+                 var $form = $(e.target);
+
+                 // Get the BootstrapValidator instance
+                 var bv = $form.data('bootstrapValidator');
+
+                 // Use Ajax to submit form data
+                 ajaxquery();
+  });
+        });
+       </script>
 </html>

@@ -15,3 +15,22 @@ function zoomOut() {
   hide_element.style.display="block";
   element.style.display = "none";
 }
+
+function add_to_cart(book_id) {
+  var data = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+
+  xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var num=JSON.parse(this.responseText);
+    var val=num.data.cart.length;
+  console.log(val);
+  $('.cartnum').text(val);
+  }
+  });
+
+  xhr.open("GET", "http://localhost:8080/book/add_to_cart/"+book_id);
+
+  xhr.send(data);
+}

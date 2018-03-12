@@ -13,7 +13,7 @@ promiseLib: promise
 var pgp = require('pg-promise')(db_config);
 const db=pgp(db_config);
 
-/* GET users listing. */
+//show by book type
 router.get('/type/:offset/:param', function(req, res, next) {
   var offset=req.params.offset;
   var sortby=req.params.param;
@@ -33,6 +33,8 @@ router.get('/type/:offset/:param', function(req, res, next) {
     });
 });
 
+
+//show by genre
 router.get('/genre/:offset/:param', function(req, res, next) {
   var offset=req.params.offset;
   var genre=req.params.param;
@@ -53,6 +55,8 @@ router.get('/genre/:offset/:param', function(req, res, next) {
 
 });
 
+
+//show single book
 router.get('/:bookId',function (req,res,next) {
     var bookId=req.params.bookId;
   db.one('SELECT * from book_info where book_id=$1',[bookId])
@@ -71,6 +75,8 @@ router.get('/:bookId',function (req,res,next) {
 
 });
 
+
+//show special books
 router.get('/:limit/specials',function (req,res,next) {
   var limit=req.params.limit;
   db.any('SELECT * from book_info where is_special=$1 order by created_at limit $2', [true,limit])
@@ -89,6 +95,7 @@ router.get('/:limit/specials',function (req,res,next) {
 
 });
 
+//show latest books
 router.get('/:limit/newProduct',function (req,res,next) {
   var limit=req.params.limit;
   db.any('SELECT * from book_info order by created_at limit $1', [limit])
@@ -106,6 +113,7 @@ router.get('/:limit/newProduct',function (req,res,next) {
     });
 });
 
+//delete a book
 router.delete('/delete/:bookId',function (req,res,next) {
   var bookId=req.params.bookId;
   console.log(bookId);
@@ -121,6 +129,26 @@ router.delete('/delete/:bookId',function (req,res,next) {
         // error;
         return next(error);
     });
+});
+
+//cart functionality
+router.get('/add_to_cart/:bookId',function (req,res,next) {
+    var bookId=req.params.bookId;
+    var user_id=req.user.user_id;
+  db.one("Update account_info set cart=cart||'{"+bookId+"}' where user_id="+user_id+"Returning *")
+    .then(function(data) {
+      res.status(200).json({
+        status:'success',
+        message: "Book added to cart",
+        data: data
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        return next(error);
+    });
+
 });
 
 /*
