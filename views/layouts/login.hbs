@@ -14,15 +14,6 @@
     <body>
 
         <div class="container-fluid">
-          <div class="container" style="display:{{display}};">
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <strong>{{title}}</strong> {{body}}
-            </div>
-          </div>
-        <div class="container-fluid">
         <div class='border row'>
           <div class="col-md-5">
             <p>&nbsp;</p>
@@ -52,24 +43,32 @@
           <p>&nbsp;</p>                  <p>&nbsp;</p>
                             <p>&nbsp;</p>                  <p>&nbsp;</p>
                                               <p>&nbsp;</p>
-          <h2 style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Or login to your account</h2>
+          <h2 style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Login to your account</h2>
+          <div class="col-md-12" style="display:{{display}};">
+            <div class="alert alert-{{value}} alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong>{{title}}</strong> {{body}}
+            </div>
+          </div>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
             <form role="form" class="form-horizontal">
               <div class="form-group">
                 <label for="username" class="control-label col-md-3"  style="color:white;">Username:</label>
                 <div class="col-md-6">
-                <input type="text" class="form-control" name="username" id="username" placeholder="Username" />
+                <input tabindex="0" type="text" class="form-control" name="username" id="username" placeholder="Username" />
                 </div>
               </div>
               <div class="form-group">
                   <label for="password" class="control-label col-md-3"  style="color:white;">Password:</label>
                   <div class="col-md-6">
-                  <input type="password" class="form-control" id="password" placeholder="Password" />
+                  <input tabindex="0" type="password" class="form-control" id="password" placeholder="Password" />
                   </div>
                 </div>
                 <p>&nbsp;</p>
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="ajaxquery()"  class="btn btn-primary col-md-3 col-md-offset-3">login</button></p>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button tabindex="0" type="button" onclick="ajaxquery()"  class="btn btn-primary col-md-3 col-md-offset-3">login</button></p>
       </form>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
@@ -81,14 +80,13 @@
                         <p>&nbsp;</p>
     </div>
     </div>
-    </div>
   </div>
     <script type="text/javascript">
     var ajaxquery = function(){
       var username = document.getElementById("username").value;
-      console.log(username);
+      //console.log(username);
       var password=document.getElementById("password").value;
-      console.log(password);
+      //console.log(password);
           var data = JSON.stringify({
           "username": username,
           "password": password
@@ -98,9 +96,15 @@
           xhr.withCredentials = true;
 
           xhr.addEventListener("readystatechange", function () {
-          if (this.readyState === 4) {
-            window.location.href = '/index';
-            console.log(this.responseText);
+          if (this.readyState === 4 ) {
+            if(this.status==200){
+            window.location.href = '/display_books';
+            //console.log(this.responseText);
+          }
+          else{
+            var json=JSON.parse(this.responseText);
+            window.location.href='/success/'+json.status;
+          }
           }
           });
 

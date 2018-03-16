@@ -16,9 +16,11 @@ var user= require('./routes/user');
 
 
 var app = express();
-
+//custom helper for handlebars
+//for reference: "https://stackoverflow.com/questions/32707322/how-to-make-a-handlebars-helper-global-in-expressjs/42224612#42224612"
+var handlebar_helper  = require('./authentication/hbs_helper/helper.js')(hbs);
 // view engine setup
-app.engine('hbs',hbs({extname: 'hbs', defaultLayout:'layout',layoutDir:__dirname+'/views/layouts/'}))
+app.engine('hbs',handlebar_helper.engine)
 app.set('views', path.join(__dirname, 'views/layouts'));
 app.set('view engine', 'hbs');
 

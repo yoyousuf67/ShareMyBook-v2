@@ -14,11 +14,11 @@ var pgp = require('pg-promise')(db_config);
 const db=pgp(db_config);
 
 //show by book type
-router.get('/type/:offset/:param', function(req, res, next) {
+router.get('/:offset/type/:param', function(req, res, next) {
   var offset=req.params.offset;
   var sortby=req.params.param;
 
-  db.any('SELECT * from book_info where book_type=$1 order by created_at offset $2', [sortby,offset])
+  db.any('SELECT * from book_info where book_type=$1 order by created_at desc offset $2', [sortby,offset])
     .then(function(data) {
       res.status(200).json({
         status:'success',
@@ -35,11 +35,11 @@ router.get('/type/:offset/:param', function(req, res, next) {
 
 
 //show by genre
-router.get('/genre/:offset/:param', function(req, res, next) {
+router.get('/:offset/genre/:param', function(req, res, next) {
   var offset=req.params.offset;
   var genre=req.params.param;
 
-  db.any('SELECT * from book_info where category=$1 order by created_at offset $2', [genre,offset])
+  db.any('SELECT * from book_info where category=$1 order by created_at desc offset $2', [genre,offset])
     .then(function(data) {
       res.status(200).json({
         status:'success',
@@ -77,13 +77,31 @@ router.get('/:bookId',function (req,res,next) {
 
 
 //show special books
-router.get('/:limit/specials',function (req,res,next) {
+router.get('/:limit/specials/:offset?',function (req,res,next) {
   var limit=req.params.limit;
-  db.any('SELECT * from book_info where is_special=$1 order by created_at limit $2', [true,limit])
+  var offset=req.params.offset;
+  if (!offset) {
+    db.any('SELECT * from book_info where is_special=$1 order by created_at desc limit $2', [true,limit])
+      .then(function(data) {
+
+        res.status(200).json({
+          status:'success',
+          message: "First"+limit+" special books",
+          data: data
+        });
+          // success;
+      })
+      .catch(function(error) {
+          // error;
+          return next(error);
+      });
+  }
+  else{
+  db.any('SELECT * from book_info where is_special=$1 order by created_at desc offset $2 limit $3', [true,offset,limit])
     .then(function(data) {
       res.status(200).json({
         status:'success',
-        message: "First"+limit+" special books",
+        message: "First"+limit+" special books with offset "+offset,
         data: data
       });
         // success;
@@ -92,13 +110,14 @@ router.get('/:limit/specials',function (req,res,next) {
         // error;
         return next(error);
     });
-
+  }
 });
 
 //show latest books
-router.get('/:limit/newProduct',function (req,res,next) {
-  var limit=req.params.limit;
-  db.any('SELECT * from book_info order by created_at limit $1', [limit])
+router.get('/:offset/newProduct',function (req,res,next) {
+  var offset=req.params.offset;
+  console.log('offset '+offset);
+  db.any('SELECT * from book_info order by created_at desc limit 9 offset $1', [offset])
     .then(function(data) {
       res.status(200).json({
         status:'success',
@@ -146,6 +165,40 @@ router.get('/add_to_cart/:bookId',function (req,res,next) {
     })
     .catch(function(error) {
         // error;
+        return next(error);
+    });
+
+});
+
+//display_cart functionality
+router.get('/cart/cart_display',function (req,res,next) {
+    //var bookId=req.params.bookId;
+    console.log(req.body);
+    var cart=req.body.user.cart;
+    var books='(';
+    for (var i = 0; i < cart.length; i++) {
+
+      if(i<cart.length-1){
+        books=books+`'`+cart[i]+`'`+',';
+      }
+      else{
+        books=books+`'`+cart[i]+`'`+')';
+      }
+    }
+    const where = pgp.as.format('WHERE book_id in '+books);
+    console.log("books "+books);
+  db.any('SELECT * from book_info $1:raw',where)
+    .then(function(data) {
+      res.status(200).json({
+        status:'success',
+        message: "Cart display",
+        data: data
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        console.log(error);
         return next(error);
     });
 

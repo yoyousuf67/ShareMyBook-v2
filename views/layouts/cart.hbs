@@ -7,26 +7,31 @@
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-     <script src="/ui/book_view.js">
+     <script src="/javascripts/book_view.js">
      </script>
-<link rel="stylesheet" href="/ui/style.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <div class="ui padded stackable grid">
-      <div class="black column">
+      <div class="one wide black column computer only">
+      </div>
+      <div class="fifteen wide black column">
         <div class="ui segments">
           <div class="ui left floated inverted segment">
-            <img src="../smblogo2.PNG" alt="Logo">
+            <a href="/display_books"><img  class="ui image computer only grid"src="/images/smblogo2.PNG" alt="Logo"></a>
+          </div>
+          <div class="ui left floated inverted segment">
+            <a href="/display_books"><img class="ui small image mobile only grid" src="/images/smblogo2.PNG" alt="Logo"></a>
           </div>
           <!--Top Right Menu-->
           <div class=" ui right floated inverted segment">
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <div class="item"><i class="large user icon"></i><a class="header">My Account</a></div>
-                <div class="item"><i class="large bookmark icon"></i><a class="header">My Wishlist</a></div>
-<div class="item"><i class="large book icon"></i><a>My Books for Sale</a></div>
-<div class="item"><i class="large sign out alternate icon"></i><a>Logout</a></div>
+                <a class="item"><i class="large user icon black"></i>My Account</a>
+                <a class="item"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item"><i class="large book icon black"></i>My Books for Sale</a>
+                  <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
                 <div class="ui section divider"></div>
@@ -61,44 +66,32 @@
         <div class="column"></div>
         </div>
         <hr>
-            <div class="ui four column stackable grid">
+              {{# if condition}}
+          <div class="ui one column stackable internally celled grid">
+                <div class="column">  <h1>&nbsp;</h1>    </div><div class="column">
+                  <div class="column">
+                    <h3 class="header">No Books Added to Cart Yet</h3>
+                  </div>
+                   <h1>&nbsp;</h1>    </div><div class="column">  <h5>&nbsp;</h5>    </div>
+                 </div>
+              {{/if}}
+              {{# each cartproducts as |val key|}}
+          <div class="ui four column stackable celled grid">
               <div class="column">
                 <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
               </div>
               <div class="column">
-                <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
+                <span><h4 class="ui header">{{val.bookname}} </h4>by {{val.author}}</span>
               </div>
             <div class="column">
-              <span class="discount">&#x20b9;200</span>
+              <span class="discount">&#x20b9;{{val.sp}}</span>
             </div>
             <div class="column">
-              Remove from Cart
+            <a href="#">Remove from Cart</a>
             </div>
-            <div class="column">
-              <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-            </div>
-            <div class="column">
-              <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-            </div>
-          <div class="column">
-            <span class="discount">&#x20b9;200</span>
           </div>
-          <div class="column">
-            Remove from Cart
-          </div>
-          <div class="column">
-            <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-          </div>
-          <div class="column">
-            <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-          </div>
-        <div class="column">
-          <span class="discount">&#x20b9;200</span>
-        </div>
-        <div class="column">
-          Remove from Cart
-        </div>
-            </div>
+            {{/each}}
+
 
 <!--Related Products-->
 <div class="ui raised segments">

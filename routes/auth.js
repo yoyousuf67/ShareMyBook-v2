@@ -17,8 +17,8 @@ router.post('/register',authHelpers.loginRedirect, (req,res,next)  => {
 
 router.post('/login',authHelpers.loginRedirect, (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    if (err) { handleResponse(res, 500, 'errorhere'); }
-    else if(!user) { handleResponse(res, 404, 'User not found'); }
+    if (err) { handleResponse(res, 500, 'Error'); }
+    else if(!user) { handleResponse(res, 404, 'Invalid Credentials'); }
      else if(user) {
 // "Note that when using a custom callback, it becomes the application's
 // responsibility to establish a session (by calling req.login()) and send

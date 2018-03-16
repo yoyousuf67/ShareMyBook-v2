@@ -36,7 +36,7 @@ function createUser (req,res) {
 }
 
 function loginRedirect(req, res, next) {
-  if (req.user) return res.status(401).json(
+  if (req.user) return res.status(400).json(
     {status: 'You are already logged in'});
     console.log("loginRedirect");
   return next();
@@ -52,7 +52,7 @@ function handleErrors(req) {
       });
     }
     else if (req.body.password.length < 6) {
-      console.log("rejectda");
+      console.log("reject");
       reject({
         message: 'Password must be longer than 6 characters'
       });

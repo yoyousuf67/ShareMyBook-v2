@@ -6,13 +6,8 @@
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-     <script src="/javascripts/main.js">
-     </script>
      <script src="/javascripts/book_view.js">
      </script>
-     <!-- fotorama.css & fotorama.js. -->
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet"> <!-- 3 KB -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> <!-- 16 KB -->
 <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
@@ -57,11 +52,10 @@
         </div>
 
         <!--Cart-->
-
-          <a onclick="cart_display()" class="ui floating labeled teal icon dropdown button">
-            <i class="cart arrow down icon"></i>
-            <span class="text">Cart(<span class="cartnum">{{cart_num}}</span>)</span>
-          </a>
+        <a onclick="cart_display()" class="ui floating labeled teal icon dropdown button">
+          <i class="cart arrow down icon"></i>
+          <span class="text">Cart(<span class="cartnum">{{cart_num}}</span>)</span>
+        </a>
         </div>
     </div>
     </div>
@@ -71,75 +65,49 @@
       <div class="one wide column computer only"></div>
       <!--Left stackable grid-->
       <div class="four wide column">
-      <div class="ui raised segments">
-        <!--Sort by Type in Left stackable grid-->
-        <div class="ui teal inverted segment">
-            <h3 class="header">CATEGORIES</h3>
-        </div>
-        <div class="ui segment">
-          <div class="ui fluid vertical menu">
-          <h4 class="ui top attached disabled header">Sort By Type:</h4>
-          <a href="/show_sorted_books_by_tog/type/Magazines/0" class="item">
-            Magazines
-          </a>
-          <a href="/show_sorted_books_by_tog/type/Comics/0" class="item">
-            Comics
-          </a>
-          <div class="ui accordion">
-          <div class="title">
-          <i class="dropdown icon"></i>
-          Books
+        <div class="ui raised segments">
+          <!--Sort by Type in Left stackable grid-->
+          <div class="ui teal inverted segment">
+              <h3 class="header">CATEGORIES</h3>
           </div>
-          <div class="content">
-          <div class="transition hidden">
-              <a class="item" href="/show_sorted_books_by_tog/type/Paperback/0">Paperback</a>
-              <a class="item" href="/show_sorted_books_by_tog/type/HardCover/0">Hard Cover</a>
-              <a class="item" href="/show_sorted_books_by_tog/type/Ebook/0">Ebook</a>
-          </div>
-          </div>
-          </div>
+          <div class="ui segment">
+            <div class="ui fluid vertical menu">
+            <h4 class="ui top attached disabled header">Sort By Type:</h4>
+            <a href="/show_sorted_books_by_tog/type/Magazines/0" id="Magazines" class="item">
+              Magazines
+            </a>
+            <a href="/show_sorted_books_by_tog/type/Comics/0" id="Comics" class="item">
+              Comics
+            </a>
+            <div class="ui accordion">
+            <div class="title">
+            <i class="dropdown icon"></i>
+            Books
             </div>
-        </div>
-        <!--Sort by Genre in Left stackable grid-->
-        <div class="ui segment">
-          <div class="ui fluid vertical menu">
-          <h4 class="ui top attached disabled header">Sort By Genre:</h4>
-          <a class="item" href="/show_sorted_books_by_tog/genre/Educational and Professional/0">Educational and Professional</a>
-          <a class="item" href="/show_sorted_books_by_tog/genre/Fiction & Non-Fiction/0">Fiction & Non-Fiction</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Philosophy/0">Philosophy</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Religion and Spirituality/0">Religion and Spirituality</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Self Help/0">Self Help</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Hobbies and Interests/0">Hobbies and Interests</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Other/0">Other</a>
+            <div class="content">
+            <div class="transition hidden">
+                <a class="item" href="/show_sorted_books_by_tog/type/Paperback/0" id="Paperback">Paperback</a>
+                <a class="item" href="/show_sorted_books_by_tog/type/HardCover/0" id="Hard Cover">Hard Cover</a>
+                <a class="item" href="/show_sorted_books_by_tog/type/Ebook/0" id="Ebook">Ebook</a>
             </div>
-        </div>
-      </div>
-    <!--Specials-->
-    <div class="ui segments">
-      <div class="ui teal inverted segment">
-          <h3 class="header">Specials</h3>
-      </div>
-      {{# each specials as |value keys|}}
-      <div class="ui padded segment">
-        <a href="/book_view/{{value.book_id}}"><div class="ui two column stackable grid">
-          <div class="column">
-            <img class="ui bordered image" src="http://via.placeholder.com/150x150">
+            </div>
+            </div>
+              </div>
           </div>
-          <div class="column">
-              <div class="ui left floating red tag label">Sale</div>
-            <span class="discount">&#x20b9;{{value.sp}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;{{value.mrp}}</span>
-            <br>
-            <span><h4 class="ui header">{{{value.bookname}}}</h4>by {{value.author}}</span><br>
+          <!--Sort by Genre in Left stackable grid-->
+          <div class="ui segment">
+            <div class="ui fluid vertical menu">
+            <h4 class="ui top attached disabled header">Sort By Genre:</h4>
+            <a class="item" href="/show_sorted_books_by_tog/genre/Educational and Professional/0" id="Educational and Professional">Educational and Professional</a>
+            <a class="item" href="/show_sorted_books_by_tog/genre/Fiction & Non-Fiction/0" id="Fiction & Non-Fiction">Fiction & Non-Fiction</a>
+              <a class="item" href="/show_sorted_books_by_tog/genre/Philosophy/0" id="Philosophy">Philosophy</a>
+              <a class="item" href="/show_sorted_books_by_tog/genre/Religion and Spirituality/0" id="Religion and Spirituality">Religion and Spirituality</a>
+              <a class="item" href="/show_sorted_books_by_tog/genre/Self Help/0" id="Self Help">Self Help</a>
+              <a class="item" href="/show_sorted_books_by_tog/genre/Hobbies and Interests/0" id="Hobbies and Interests">Hobbies and Interests</a>
+              <a class="item" href="/show_sorted_books_by_tog/genre/Other/0" id="Other">Other</a>
+              </div>
           </div>
         </div>
-      </a
-      {{/each}}
-      <div class="ui row">
-      <div class="ui padded segment">
-        <a href="/show_sorted_books/specials/0"><h4>Show More . . .</h4></a>
-      </div>
-      </div>
-    </div>
   </div><!--Left stackable grid ends-->
 
       <!--Dummy stackable grid-->
@@ -170,22 +138,16 @@
         </div>
         </div>
         </div>
-       <!--New Items-->
+       <!--Display Item from related categories-->
          <div class="ui raised segments">
            <div class="ui teal inverted fluid segment">
-               <h3 class="header">NEW PRODUCTS</h3>
+               <h3 class="header">SELECTED CATEGORY</h3>
            </div>
            <div class="ui padded segment">
-             <div class="ui inline cookie nag">
-              <span class="title">
-                The selected item has been added to cart.
-              </span>
-              <i class="close icon"></i>
-            </div>
              <div class="ui three column equal width stackable celled center aligned grid">
-               {{# each newproducts as |val key|}}
+               {{# each sortedproducts as |val key|}}
                <div class="column">
-                 <div class="ui container" id="{{val.book_id}}">
+                 <div class="ui container">
                    <div class="item">
                      <div class="ui blurring image">  <div class="ui dimmer">
                        <div class="content">
@@ -206,8 +168,11 @@
                {{/each}}
            <div class="ui row">
              <div class="ui section divider"></div>
-             <p>&nbsp;</p>
-             <a href="/show_sorted_books/newProduct/0"><h4 class="header">Show More . . .</h4></a>
+             <div class="ui borderless menu">
+               {{#each datalen as |value keys|}}
+              <a class="item" id="{{value}}" href="/show_sorted_books/{{../by_type}}/{{value}}">{{value}}</a>
+              {{/each}}
+          </div>
            </div>
          </div>
          </div>
@@ -221,11 +186,12 @@
     </div>
   </div>
   </body>
-<script type="text/javascript">
-$('.ui.dropdown').dropdown({on: 'click'});
-$('.ui.image').dimmer({on: 'hover'});
-$('.ui.icon.button').popup({on: 'click'});
-$('.ui.accordion').accordion('refresh');
-$(document).ready(functieArray());
-</script>
+  <script type="text/javascript">
+    $('.ui.dropdown').dropdown({on: 'click'});
+    $('.ui.image').dimmer({on: 'hover'});
+    $('.ui.icon.button').popup({on: 'click'});
+    $('.ui.accordion').accordion('refresh');
+    $('#{{active}}').addClass('active');
+    $('#{{active_tog}}').addClass('active teal');
+  </script>
 </html>

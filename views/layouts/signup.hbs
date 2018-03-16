@@ -29,6 +29,14 @@
 <body>
   <div class="container-fluid">
     <div class="border row">
+      <div class="col-md-12" style="display:{{display}};">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>{{title}}</strong> {{body}}
+        </div>
+      </div>
       <div class="col-md-5">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -142,23 +150,20 @@ var ajaxquery = function(){
     if (this.readyState === 4) {
       console.log(this.responseText);
       if (this.status==200) {
-        window.location.href = '/';
+        window.location.href = '/success/success';
       }
       else {
-        window.location.href = '/success'
+        window.location.href = '/register/error'
       }
     }
   });
 
   xhr.open("POST", "/auth/register");
   xhr.setRequestHeader("content-type", "application/json");
-  //xhr.setRequestHeader("cache-control", "no-cache");
-  //xhr.setRequestHeader("postman-token", "32f71b1f-1715-a641-accf-332f1262026b");
+
 
   xhr.send(data);
 }
-</script>
-<script type="text/javascript">
     $(document).ready(function () {
         var validator=$("#registration-form").bootstrapValidator({
             framework:"bootstrap",
@@ -187,7 +192,7 @@ var ajaxquery = function(){
                     },
                     regexp: {
                         regexp: /^[a-zA-Z0-9_]+$/,
-                        message: '*The username can not contain spaces'
+                        message: '*The username can not contain spaces or special characters'
                     },
                     stringLength : {
                         min:4,
@@ -232,10 +237,6 @@ var ajaxquery = function(){
                 validators : {
                     notEmpty : {
                         message: "*Password is required",
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9]+$/,
-                        message: '*The password can only consist of alphabets and numbers'
                     },
                     stringLength : {
                         min:6,

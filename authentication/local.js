@@ -16,7 +16,7 @@ var pgp = require('pg-promise')(db_config);
 const db=pgp(db_config);
 passport.use(new LocalStrategy(options, (username, password, done) => {
   // check to see if the username exists
-  db.one('Select * from account_info where username=$1',[username])
+  db.oneOrNone('Select * from account_info where username=$1',[username])
   .then((user) => {
     //console.log(user);
     if (!user) return done(null, false);

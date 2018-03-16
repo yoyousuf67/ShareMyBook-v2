@@ -16,3 +16,8 @@
   background-image: url('http://ginger-mum.com/wp-content/uploads/2015/10/3633-1269758855-0da5042c33400a811a5d766be4579cb8.jpg');
   background-repeat: no-repeat;
 }
+
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
