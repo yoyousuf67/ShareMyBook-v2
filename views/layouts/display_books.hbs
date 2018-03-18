@@ -32,9 +32,9 @@
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <a class="item"><i class="large user icon black"></i>My Account</a>
-                <a class="item"><i class="large bookmark icon black"></i>My Wishlist</a>
-                  <a class="item"><i class="large book icon black"></i>My Books for Sale</a>
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
                   <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
@@ -105,7 +105,7 @@
           <div class="ui fluid vertical menu">
           <h4 class="ui top attached disabled header">Sort By Genre:</h4>
           <a class="item" href="/show_sorted_books_by_tog/genre/Educational and Professional/0">Educational and Professional</a>
-          <a class="item" href="/show_sorted_books_by_tog/genre/Fiction & Non-Fiction/0">Fiction & Non-Fiction</a>
+          <a class="item" href="/show_sorted_books_by_tog/genre/Fiction and Non-Fiction/0">Fiction & Non-Fiction</a>
             <a class="item" href="/show_sorted_books_by_tog/genre/Philosophy/0">Philosophy</a>
             <a class="item" href="/show_sorted_books_by_tog/genre/Religion and Spirituality/0">Religion and Spirituality</a>
             <a class="item" href="/show_sorted_books_by_tog/genre/Self Help/0">Self Help</a>
@@ -177,20 +177,16 @@
            </div>
            <div class="ui padded segment">
              <div class="ui inline cookie nag">
-              <span class="title">
-                The selected item has been added to cart.
-              </span>
-              <i class="close icon"></i>
             </div>
              <div class="ui three column equal width stackable celled center aligned grid">
                {{# each newproducts as |val key|}}
                <div class="column">
-                 <div class="ui container" id="{{val.book_id}}">
+                 <div class="ui container cart{{val.book_id}} wishlist{{val.book_id}}">
                    <div class="item">
                      <div class="ui blurring image">  <div class="ui dimmer">
                        <div class="content">
-                         <a class="ui inverted teal button" onclick="add_to_cart({{val.book_id}})"><i class="cart plus icon"></i></a>
-                         <a class="ui inverted yellow button"><i class="bookmark icon"></i></a>
+                         <a class="ui inverted teal button"  onclick="add_to_cart({{val.book_id}})"><i class="cart plus icon"></i></a>
+                         <a class="ui inverted yellow button" onclick="add_to_wishlist({{val.book_id}})"><i class="bookmark icon"></i></a>
                          <a class="ui inverted red button" href="/book_view/{{val.book_id}}">View</a>
                        </div>
                      </div>

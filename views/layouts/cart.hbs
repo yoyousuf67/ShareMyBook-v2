@@ -28,9 +28,9 @@
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <a class="item"><i class="large user icon black"></i>My Account</a>
-                <a class="item"><i class="large bookmark icon black"></i>My Wishlist</a>
-                  <a class="item"><i class="large book icon black"></i>My Books for Sale</a>
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
                   <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
@@ -87,55 +87,11 @@
               <span class="discount">&#x20b9;{{val.sp}}</span>
             </div>
             <div class="column">
-            <a href="#">Remove from Cart</a>
+            <a onclick="remove_from_cart({{val.book_id}})">Remove from Cart</a>
             </div>
           </div>
             {{/each}}
-
-
-<!--Related Products-->
-<div class="ui raised segments">
-  <div class="ui teal inverted fluid segment">
-      <h3 class="header">Related Products</h3>
-  </div>
-  <div class="ui padded segment">
-    <div class="ui three column equal width stackable grid">
-      <div class="column">
-        <div class="ui container">
-          <div class="item">
-            <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-          </div>
-          <div class="item">
-            <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-            <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui container">
-          <div class="item">
-            <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-          </div>
-          <div class="item">
-            <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-            <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui container">
-          <div class="item">
-            <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-          </div>
-          <div class="item">
-            <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-            <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-          </div>
-        </div>
-      </div>
-</div>
-</div>
-</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
   </div><!--Left stackable grid ends-->
 
       <!--Dummy stackable grid-->
@@ -161,5 +117,22 @@
 $('.ui.dropdown').dropdown({on: 'click'});
 $('.ui.image').dimmer({on: 'hover'});
 $('.ui.icon.button').popup({on: 'click'});
+</script>
+<script>
+function remove_from_cart(book_id) {
+  var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://localhost:8080/book/remove_from/cart/"+book_id,
+  "method": "GET",
+  "headers": {
+  "cache-control": "no-cache"
+  }
+  }
+$.ajax(settings).done(function (response) {
+console.log(response);
+cart_display();
+});
+}
 </script>
 </html>

@@ -7,17 +7,16 @@
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-     <script src="/ui/book_view.js">
-     </script>
-<link rel="stylesheet" href="/ui/style.css">
+     <script src="/javascripts/book_view.js"></script>
+     <script src="/javascripts/account.js"></script>
+<link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <div class="ui padded stackable grid">
-      <div class="black column">
+      <div class="one wide black column computer only">
+      </div>
+      <div class="fifteen wide black column">
         <div class="ui segments">
-          <div class="ui left floated inverted segment">
-            <a href="/display_books"><img  class="ui image computer only grid"src="/images/smblogo2.PNG" alt="Logo"></a>
-          </div>
           <div class="ui left floated inverted segment">
             <a href="/display_books"><img  class="ui image computer only grid"src="/images/smblogo2.PNG" alt="Logo"></a>
           </div>
@@ -29,10 +28,10 @@
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <div class="item"><i class="large user icon"></i><a class="header">My Account</a></div>
-                <div class="item"><i class="large bookmark icon"></i><a class="header">My Wishlist</a></div>
-                <div class="item"><i class="large book icon"></i><a>My Books for Sale</a></div>
-                <div class="item"><i class="large sign out alternate icon"></i><a>Logout</a></div>
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
+                  <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
                 <div class="ui section divider"></div>
@@ -42,192 +41,30 @@
         </div>
       </div>
     </div>
-        <!--account, wishlist ,books for sale-->
-        <div class="ui container segment">
-          <div class="ui grid">
-        <div class="four wide column">
-          <div class="ui vertical fluid tabular menu">
-            <a class="active item account" onclick="change('account')">
-              My Account
-            </a>
-            <a class="item wishlist" onclick="change('wishlist')">
-              My Wishlist
-            </a>
-            <a class="item books" onclick="change('books')">
-              My Books for Sale
-            </a>
-          </div>
-        </div>
-        <div class="twelve wide stretched column">
-        <!--My Books-->
-          <div class="ui segment some" id="books" style="display:none">
-            <h3 class="ui header">My Books for Sale</h3>
-            <div class="ui four column grid computer only">
-              <div class="column"></div>
-              <div class="column"><h5>Detail</h5></div>
-            <div class="column"><h5>Price</h5></div>
-            <div class="column"></div>
-            </div>
-            <hr>
-                <div class="ui four column stackable grid">
-                  <div class="column">
-                    <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-                  </div>
-                  <div class="column">
-                    <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-                  </div>
-                <div class="column">
-                  <span class="discount">&#x20b9;200</span>
-                </div>
-                <div class="column">
-                  Remove from Catalog
-                </div>
-                <div class="column">
-                  <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-                </div>
-                <div class="column">
-                  <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-                </div>
-              <div class="column">
-                <span class="discount">&#x20b9;200</span>
-              </div>
-              <div class="column">
-                Remove from Catalog
-              </div>
-              <div class="column">
-                <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-              </div>
-              <div class="column">
-                <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-              </div>
-            <div class="column">
-              <span class="discount">&#x20b9;200</span>
-            </div>
-            <div class="column">
-              Remove from Catalog
-            </div>
-            <div class="ui centered row">
-              <a href="#"><h3>Add a Book for Sale</h3></a>
-            </div>
-                </div>
-              </div>
-                  <!--My Wishlist-->
-              <div class="ui segment some" id="wishlist" style="display:none">
-                <h3 class="ui header">My Wishlist</h3>
-                <div class="ui four column grid computer only">
-                  <div class="column"></div>
-                  <div class="column"><h5>Detail</h5></div>
-                <div class="column"><h5>Price</h5></div>
-                <div class="column"></div>
-                </div>
-                <hr>
-                    <div class="ui four column stackable grid">
-                      <div class="column">
-                        <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-                      </div>
-                      <div class="column">
-                        <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-                      </div>
-                    <div class="column">
-                      <span class="discount">&#x20b9;200</span>
-                    </div>
-                    <div class="column">
-                      Remove from Wishlist
-                    </div>
-                    <div class="column">
-                      <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-                    </div>
-                    <div class="column">
-                      <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-                    </div>
-                  <div class="column">
-                    <span class="discount">&#x20b9;200</span>
-                  </div>
-                  <div class="column">
-                    Remove from Wishlist
-                  </div>
-                  <div class="column">
-                    <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-                  </div>
-                  <div class="column">
-                    <span><h4 class="ui header">The Peacan Man </h4>by Author</span>
-                  </div>
-                <div class="column">
-                  <span class="discount">&#x20b9;200</span>
-                </div>
-                <div class="column">
-                  Remove from Wishlist
-                </div>
-                    </div>
-                  </div>
-                  <!--My Account-->
-                  <div class="ui form some" id="account">
-                    <h3>My Account</h3>
-                    <div class="field">
-                      <div class="label">Username   :</div>
-                      <div class="ui disabled input">
-                      <input type="text" placeholder="Username" value="Username">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="label">Email Id   :</div>
-                      <div class="ui disabled input">
-                      <input type="email" placeholder="Email Id" value="Email Id">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="label">Full Name   :</div>
-                      <div class="ui input">
-                      <input type="text" placeholder="Full Name" value="Full Name">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="label">Contact No   :</div>
-                      <div class="ui input">
-                      <input type="text" placeholder="Contact No" value="Contact No">
-                      </div>
-                    </div>
-                    <div class="field">
-                      <div class="label">Address</div>
-                      <div class="ui input">
-                      <input type="text" placeholder="Address" value="Address">
-                      </div>
-                    </div>
-                    <br>
-                    <button class="ui button" type="submit">Update</button>
-                  </div>
-                  <br><br>
+    <!--account, wishlist ,books for sale-->
+    <div class="ui container segment">
+      <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui vertical fluid tabular menu">
+        <a class="item account" onclick="account()">
+          My Account
+        </a>
+        <a class="item wishlist" onclick="wishlist()">
+          My Wishlist
+        </a>
+        <a class="item books" onclick="my_books_for_sale()">
+          My Books for Sale
+        </a>
+      </div>
     </div>
-    </div>
+  <div class="twelve wide stretched column" id="show">
     </div>
   </div>
-  <!--footer-->
-  <div class="ui inverted vertical footer segment form-page">
-    <div class="ui container">
-  <i class="copyright outline icon"></i> 2018 ShareMyBook. All Rights Reserved.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>About us</a>&emsp;&emsp;<a> Contact us</a>
-    </div>
-  </div>
+</div>
   </body>
-<script type="text/javascript">
-$('.ui.dropdown').dropdown({on: 'click'});
-$('.ui.image').dimmer({on: 'hover'});
-$('.ui.icon.button').popup({on: 'click'});
-function change(value) {
-  var qs=document.querySelectorAll('a.item.active');
-  if(qs[0]){
-    qs[0].classList.remove('active');
-  }
-  document.querySelector('a.'+value).classList.add('active');
-  var el=document.querySelectorAll(".some");
-  for (var i = 0; i < el.length; i++) {
-    if(el[i].id==value){
-      el[i].style.display="inline-block"
-    }
-    else {
-      el[i].style.display="none";
-    }
-  }
-}
-</script>
-
+  <script>
+    $(document).ready({{to_display}}());
+    $('.ui.dropdown').dropdown({on: 'click'});
+    $('.ui.icon.button').popup({on: 'click'});
+  </script>
 </html>

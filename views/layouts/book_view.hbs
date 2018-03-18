@@ -27,9 +27,9 @@
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <a class="item"><i class="large user icon black"></i>My Account</a>
-                <a class="item"><i class="large bookmark icon black"></i>My Wishlist</a>
-                  <a class="item"><i class="large book icon black"></i>My Books for Sale</a>
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
                   <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
@@ -100,7 +100,7 @@
             <div class="ui fluid vertical menu">
             <h4 class="ui top attached disabled header">Sort By Genre:</h4>
             <a class="item" href="/show_sorted_books_by_tog/genre/Educational and Professional/0">Educational and Professional</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Fiction & Non-Fiction/0">Fiction & Non-Fiction</a>
+            <a class="item" href="/show_sorted_books_by_tog/genre/Fiction and Non-Fiction/0">Fiction & Non-Fiction</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Philosophy/0">Philosophy</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Religion and Spirituality/0">Religion and Spirituality</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Self Help/0">Self Help</a>
@@ -135,6 +135,8 @@
         </div>
         </div>
         <div class="ui two column stackable grid">
+          <div class="ui inline cookie nag">
+         </div>
     	<div class="column">
         <div class="segment">
           <img class="ui bordered image" id="imgZoom" width="300px" height="300px" onmousemove="zoomIn(event)" onmouseout="zoomOut()" src="http://ginger-mum.com/wp-content/uploads/2015/10/3633-1269758855-0da5042c33400a811a5d766be4579cb8.jpg">
@@ -149,54 +151,13 @@
             <br>
             {{book.description}}</div>
             <br>
-             <a class="ui teal button {{disable}}" onclick="add_to_cart({{book.book_id}})" id="{{book.book_id}}"><i class="cart plus icon"></i>Add to Cart</a>
-             <div class="ui yellow button"><i class="bookmark icon"></i>Add to Wishlist</div>
+             <a class="ui teal button {{disablecart}} cart{{book.book_id}}" onclick="add_to_cart({{book.book_id}})"><i class="cart plus icon"></i>Add to Cart</a>
+             <a class="ui yellow button wishlist{{book.book_id}} {{disablewishlist}}" onclick="add_to_wishlist({{book.book_id}})"><i class="bookmark icon"></i>Add to Wishlist</a>
       </div>
     </div>
-    <!--Related Products-->
-    <div class="ui raised segments">
-      <div class="ui teal inverted fluid segment">
-          <h3 class="header">Related Products</h3>
-      </div>
-      <div class="ui padded segment">
-        <div class="ui three column equal width stackable grid">
-          <div class="column">
-            <div class="ui container">
-              <div class="item">
-                <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-              </div>
-              <div class="item">
-                <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-                <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="ui container">
-              <div class="item">
-                <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-              </div>
-              <div class="item">
-                <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-                <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="ui container">
-              <div class="item">
-                <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
-              </div>
-              <div class="item">
-                <span><h4 class="ui header">The Peacan Man </h4>by Author</span><br>
-                <span class="discount">&#x20b9;200</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;400</span>
-              </div>
-            </div>
-          </div>
-    </div>
-    </div>
- </div>
   </div>
+</div>
+  <br><br><br>
   <!--footer-->
   <div class="ui inverted bottom attached segment">
     <div class="ui container">

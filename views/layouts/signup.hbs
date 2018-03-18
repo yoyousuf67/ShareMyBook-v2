@@ -180,6 +180,10 @@ var ajaxquery = function(){
                     notEmpty : {
                         message: "*Full name  is required",
                     },
+                    regexp: {
+                        regexp: /^[a-zA-Z ]+$/,
+                        message: '*Please enter a valid name'
+                    },
                     stringLength : {
                         min:3,
                     }

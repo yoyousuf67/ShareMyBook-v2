@@ -26,15 +26,15 @@
           <div class=" ui right floated inverted segment">
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
-              <div class="menu">
-                <a class="item"><i class="large user icon black"></i>My Account</a>
-                <a class="item"><i class="large bookmark icon black"></i>My Wishlist</a>
-                  <a class="item"><i class="large book icon black"></i>My Books for Sale</a>
-                  <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
-                <div class="ui section divider"></div>
-                <div class="ui red header">Welcome to our Online Store</div>
-                <div class="ui section divider"></div>
-              </div>
+                <div class="menu">
+                  <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                  <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                    <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
+                    <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
+                  <div class="ui section divider"></div>
+                  <div class="ui red header">Welcome to our Online Store</div>
+                  <div class="ui section divider"></div>
+                </div>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
             <div class="ui fluid vertical menu">
             <h4 class="ui top attached disabled header">Sort By Genre:</h4>
             <a class="item" href="/show_sorted_books_by_tog/genre/Educational and Professional/0" id="Educational and Professional">Educational and Professional</a>
-            <a class="item" href="/show_sorted_books_by_tog/genre/Fiction & Non-Fiction/0" id="Fiction & Non-Fiction">Fiction & Non-Fiction</a>
+            <a class="item" href="/show_sorted_books_by_tog/genre/Fiction and Non-Fiction/0" id="Fiction and Non-Fiction">Fiction & Non-Fiction</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Philosophy/0" id="Philosophy">Philosophy</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Religion and Spirituality/0" id="Religion and Spirituality">Religion and Spirituality</a>
               <a class="item" href="/show_sorted_books_by_tog/genre/Self Help/0" id="Self Help">Self Help</a>
@@ -145,6 +145,11 @@
            </div>
            <div class="ui padded segment">
              <div class="ui three column equal width stackable celled center aligned grid">
+               {{# if condition}}
+               <div class="column">
+                 <h3 class=header>No Product Added In This Category Yet</h3>
+               </div>
+               {{/if}}
                {{# each sortedproducts as |val key|}}
                <div class="column">
                  <div class="ui container">

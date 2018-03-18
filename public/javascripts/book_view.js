@@ -33,12 +33,33 @@ function add_to_cart(book_id) {
     var val=num.data.cart.length;
   console.log(val);
   $('.cartnum').text(val);
-  $('.cookie.nag').nag('show');
-  $("#"+book_id).addClass("disabledbutton");
-//  $('.ui.inline.nag.cookie.'+book_id).nag('show');
+  $('.cookie.nag').html(`<span class="title">The selected item has been added to cart.</span><i class="close icon"></i>`).nag('show');
+  $(".cart"+book_id).addClass("disabledbutton");
+  $(".wishlist"+book_id).addClass("disabledbutton");
   }
   });
   xhr.open("GET", "http://localhost:8080/book/add_to_cart/"+book_id);
+  xhr.setRequestHeader("cache-control", "no-cache");
+  xhr.send(data);
+}
+
+//add a book to wishlist
+function add_to_wishlist(book_id) {
+  var data = null;
+  var xhr = new XMLHttpRequest();
+  xhr.withCredentials = true;
+  xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    var num=JSON.parse(this.responseText);
+    var val=num.data.wishlist.length;
+  console.log(val);
+  $('.wishlist').text(val);
+  $('.cookie.nag').html(`<span class="title">The selected item has been added to wishlist.</span><i class="close icon"></i>`).nag('show');
+  $(".wishlist"+book_id).addClass("disabledbutton");
+//  $('.ui.inline.nag.cookie.'+book_id).nag('show');
+  }
+  });
+  xhr.open("GET", "http://localhost:8080/book/add_to_wishlist/"+book_id);
   xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(data);
 }
@@ -62,3 +83,7 @@ var logout = function(){
   function cart_display() {
     window.location.replace("/user/cart_display");
         }
+//Display books in cart
+  // function wishlist_display() {
+  // window.location.replace("/user/wishlist_display");
+  // }

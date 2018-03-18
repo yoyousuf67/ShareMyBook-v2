@@ -132,15 +132,17 @@ router.get('/:offset/newProduct',function (req,res,next) {
     });
 });
 
-//delete a book
-router.delete('/delete/:bookId',function (req,res,next) {
-  var bookId=req.params.bookId;
-  console.log(bookId);
-  db.result('delete from book_info where book_id = $1', bookId)
-    .then(function(result) {
+
+//fetch books by user
+router.get('/:username/books_by_user',function (req,res,next) {
+  var username=req.params.username;
+  console.log('username '+username);
+  db.any('SELECT book_id from book_info where username=$1', [username])
+    .then(function(data) {
       res.status(200).json({
         status:'success',
-        message: `Removed ${result.rowCount} book`
+        message: "First nine books",
+        data: data
       });
         // success;
     })
@@ -150,7 +152,34 @@ router.delete('/delete/:bookId',function (req,res,next) {
     });
 });
 
-//cart functionality
+//delete a book
+router.delete('/delete/:bookId',function (req,res,next) {
+  var bookId=req.params.bookId;
+  var user_id=req.user.user_id;
+  console.log(bookId);
+  db.none('delete from book_info where book_id = $1', bookId)
+    .then(function() {
+
+      db.one("Update account_info set books = array_remove(books,'"+bookId+"') where user_id="+user_id+"Returning *")
+        .then(function(result) {
+          res.status(200).json({
+            status:'success',
+            message: `Removed book`
+          });
+            // success;
+        })
+        .catch(function(error) {
+            // error;
+            return next(error);
+        });
+    })
+    .catch(function(error) {
+        // error;
+        return next(error);
+    });
+});
+
+//add to cart functionality
 router.get('/add_to_cart/:bookId',function (req,res,next) {
     var bookId=req.params.bookId;
     var user_id=req.user.user_id;
@@ -173,20 +202,22 @@ router.get('/add_to_cart/:bookId',function (req,res,next) {
 //display_cart functionality
 router.get('/cart/cart_display',function (req,res,next) {
     //var bookId=req.params.bookId;
-    console.log(req.body);
-    var cart=req.body.user.cart;
-    var books='(';
+    if(req.body.user.cart&&req.body.user.cart.length!=0)
+{ console.log(req.body.user.cart);
+  var cart=req.body.user.cart;
+    var books=`(`;
     for (var i = 0; i < cart.length; i++) {
 
       if(i<cart.length-1){
-        books=books+`'`+cart[i]+`'`+',';
+        books=books+`'`+cart[i]+`'`+`,`;
       }
       else{
-        books=books+`'`+cart[i]+`'`+')';
+        books=books+`'`+cart[i]+`'`+`)`;
       }
+      console.log(books);
     }
     const where = pgp.as.format('WHERE book_id in '+books);
-    console.log("books "+books);
+    //console.log(books);
   db.any('SELECT * from book_info $1:raw',where)
     .then(function(data) {
       res.status(200).json({
@@ -201,17 +232,25 @@ router.get('/cart/cart_display',function (req,res,next) {
         console.log(error);
         return next(error);
     });
+  }else{
+    res.status(200).json({
+      status:'success',
+      message: "wishlist display",
+      data: ''
+    });
+  }
 
 });
 
-/*
-router.get('/relatedProducts/:genreortype',function (req,res,next) {
-  var genreortype=req.params.genreortype;
-  db.any('SELECT * from book_info order by created_at limit 3')
+//add_to_wishlist functionality
+router.get('/add_to_wishlist/:bookId',function (req,res,next) {
+    var bookId=req.params.bookId;
+    var user_id=req.user.user_id;
+  db.one("Update account_info set wishlist=wishlist||'{"+bookId+"}' where user_id="+user_id+"Returning *")
     .then(function(data) {
       res.status(200).json({
         status:'success',
-        message: "Related Books",
+        message: "Book added to wishlist",
         data: data
       });
         // success;
@@ -220,6 +259,92 @@ router.get('/relatedProducts/:genreortype',function (req,res,next) {
         // error;
         return next(error);
     });
-});*/
+
+});
+
+
+//remove_from_wishlist functionality
+router.get('/remove_from/:wishlist_or_cart/:bookId',function (req,res,next) {
+    var bookId=req.params.bookId;
+    var wishlist_or_cart=req.params.wishlist_or_cart;
+    var user_id=req.user.user_id;
+  db.one("Update account_info set "+wishlist_or_cart+" = array_remove("+wishlist_or_cart+",'"+bookId+"') where user_id="+user_id+"Returning *")
+    .then(function(data) {
+      res.status(200).json({
+        status:'success',
+        message: "Book removed from wishlist",
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        return next(error);
+    });
+
+});
+
+//display wishlist functionality
+router.get('/wishlist/wishlist_display',function (req,res,next) {
+    //var bookId=req.params.bookId;
+    console.log(req.user.wishlist);
+    if (req.user.wishlist&&req.user.wishlist.length!=0) {
+      var cart=req.user.wishlist;
+      var books='(';
+      for (var i = 0; i < cart.length; i++) {
+
+        if(i<cart.length-1){
+          books=books+`'`+cart[i]+`'`+',';
+        }
+        else{
+          books=books+`'`+cart[i]+`'`+')';
+        }
+      }
+      const where = pgp.as.format('WHERE book_id in '+books);
+    console.log("books "+books);
+  db.any('SELECT * from book_info $1:raw',where)
+    .then(function(data) {
+      console.log('data '+data);
+      res.status(200).json({
+        status:'success',
+        message: "wishlist display",
+        data: data
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        console.log(error);
+        return next(error);
+    });
+  }else{
+    res.status(200).json({
+      status:'success',
+      message: "wishlist display",
+      data: ''
+    });
+  }
+});
+
+
+//display my books for sale functionality
+router.get('/sale/sale_display',function (req,res,next) {
+  var username=req.user.username;
+  db.any('SELECT * from book_info where username=$1',[username])
+    .then(function(data) {
+      console.log('data '+data);
+      res.status(200).json({
+        status:'success',
+        message: "wishlist display",
+        data: data
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        console.log(error);
+        return next(error);
+    });
+});
+
 
 module.exports = router;
