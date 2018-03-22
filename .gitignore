@@ -1,3 +1,4 @@
 node_modules
 npm-debug.log.3688053198
-views/layout/example.hbs
+views/layouts/example.hbs
+.env

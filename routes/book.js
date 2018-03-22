@@ -1,13 +1,14 @@
+require('dotenv').config()
 var express = require('express');
 var router = express.Router();
 var promise = require('bluebird');
 //setup db
 const db_config={
-host: 'localhost', // server name or IP address;
-port: 5432,
-database: 'smb',
-user: 'user',
-password: 'root',
+host: process.env.HOST, // server name or IP address;
+port: process.env.PORT||5432,
+database: process.env.DATABASE,
+user: process.env.USER,
+password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);
@@ -214,7 +215,7 @@ router.get('/cart/cart_display',function (req,res,next) {
       else{
         books=books+`'`+cart[i]+`'`+`)`;
       }
-      console.log(books);
+      //console.log(books);
     }
     const where = pgp.as.format('WHERE book_id in '+books);
     //console.log(books);
@@ -346,5 +347,32 @@ router.get('/sale/sale_display',function (req,res,next) {
     });
 });
 
+//add a book
+router.get('/book/add_book',function (req,res,next) {
+  var newarr=req.body.newarr;
+  var user_id=req.body.user.user_id;
+  var book_id=req.body.book_id;
+  db.none('Insert into book_info(book_id,username,bookname,author,mrp,sp,book_type,language,category,front_cover,description) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)',
+  newarr)
+    .then(function() {
 
+        db.one("Update account_info set books=books||'{"+book_id+"}' where user_id="+user_id+"Returning *")
+        .then(function(data) {
+          res.status(200).json({
+            status:'success',
+            message: "Update User Info",
+            data: data
+          });
+            // success;
+        })
+        .catch(function(error) {
+            // error;
+            return next(error);
+        });
+    })
+    .catch(function(error) {
+        // error;
+        return next(error);
+    });
+})
 module.exports = router;

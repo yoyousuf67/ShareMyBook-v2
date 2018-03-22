@@ -28,15 +28,6 @@
 </head>
 <body>
   <div class="container-fluid">
-    <div class="border row">
-      <div class="col-md-12" style="display:{{display}};">
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <strong>{{title}}</strong> {{body}}
-        </div>
-      </div>
       <div class="col-md-5">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
@@ -63,6 +54,14 @@
               <p>&nbsp;</p>
               <p>&nbsp;</p>
               <p>&nbsp;</p><p>&nbsp;</p>
+              <div class="col-md-12" style="display:{{display}};">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong>{{title}}</strong> {{body}}
+                </div>
+              </div>
               <div class="well-lg green">
           <form role="form" class="form-horizontal" id="registration-form" class="form-horizontal">
             <div class="form-group">

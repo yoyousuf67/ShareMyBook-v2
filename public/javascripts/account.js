@@ -33,21 +33,21 @@ $.ajax(settings).done(function (response) {
   }
   for (var i = 0; i < response.data.length; i++) {
     val=response.data[i]
-    console.log(response.data[i]);
+    // console.log(response.data[i]);
   disp=disp+`
       <div class="ui four column stackable celled grid">
         <div class="column">
-          <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
+          <a href="/book_view/`+val.book_id+`"><img class="ui bordered image" src="`+val.front_cover+`"/></a>
           </div>
           <div class="column">
-          <span><h4 class="ui header">`+val.bookname+ `</h4>by `+val.author+ `</span>
+          <span><a href="/book_view/`+val.book_id+`"><h4 class="ui header"></a>`+val.bookname+ `</h4>by `+val.author+ `</span>
           </div>
             <div class="column">
             <span class="discount">&#x20b9;`+val.sp+ `</span>
             </div>
             <div class="column">
-            <a onclick="remove_from_wishlist(`+val.book_id+`)">Remove from Wishlist</a><br><br><br>
-            <a onclick="add_to_cart_wishlist(`+val.book_id+`)">Add to Cart</a>
+            <a onclick='remove_from_wishlist("`+val.book_id+`")'>Remove from Wishlist</a><br><br><br>
+            <a onclick='add_to_cart_wishlist("`+val.book_id+`")'>Add to Cart</a>
             </div>
       </div>
       `
@@ -166,7 +166,7 @@ function render_form(data) {
         success: function(response) {
           data=response.data;
           // callback code here
-          console.log(response);
+          // console.log(response);
           var disp=render_form(data);
           $('a.item.active').removeClass('active');
           $('a.item.account').addClass('active');
@@ -196,7 +196,7 @@ function render_form(data) {
     $('a.item.active').removeClass('active');
     $('a.item.books').addClass('active');
     $.ajax(settings).done(function (response) {
-            console.log(response.data.length);
+          //  console.log(response.data.length);
     var disp=`<div class="ui segment ">
           <h3 class="ui header">My Books for Sale</h3>
           <div class="ui four column grid computer only">
@@ -215,26 +215,31 @@ function render_form(data) {
                        <h1>&nbsp;</h1>    </div><div class="column">  <h5>&nbsp;</h5>    </div>`
     }
     for (var i = 0; i < response.data.length; i++) {
-      val=response.data[i]
-      console.log(response.data[i]);
+      val=response.data[i];
+      // console.log(response.data[i]);
     disp=disp+`
         <div class="ui four column stackable celled grid">
           <div class="column">
-            <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
+            <a href="/book_view/`+val.book_id+`"><img class="ui bordered image" src="`+val.front_cover+`"/></a>
             </div>
             <div class="column">
-            <span><h4 class="ui header">`+val.bookname+ `</h4>by `+val.author+ `</span>
+            <span><a href="/book_view/`+val.book_id+`"><h4 class="ui header">`+val.bookname+ `</h4></a>by `+val.author+ `</span>
             </div>
               <div class="column">
               <span class="discount">&#x20b9;`+val.sp+ `</span>
               </div>
               <div class="column">
-              <a onclick=del_book(`+val.book_id+`)>Remove from Catalog</a><br><br><br>
+              <a onclick=del_book("`+val.book_id+`")>Remove from Catalog</a><br><br><br>
               </div>
         </div>
         `
     }
-    disp=disp+`</div>`
+    disp=disp+`
+    <div class="ui divider"></div>
+    <div class="ui celled center aligned grid">
+    <a href="/book_form"><h3>Add Book To Catalog</h3></a>
+    </div>
+    </div>`
     $('#show').html(disp);
   });
   }
@@ -250,7 +255,7 @@ function remove_from_wishlist(book_id){
 }
 
 $.ajax(settings).done(function (response) {
-  console.log(response);
+  // console.log(response);
     window.location.replace("/account_info/wishlist");
 });
 }
@@ -294,9 +299,9 @@ function del_book(book_id) {
     "cache-control": "no-cache",
   }
 }
-
+// console.log(book_id);
 $.ajax(settings).done(function (response) {
-  console.log(response);
+  // console.log(response);
           window.location.replace("/account_info/my_books_for_sale");
 });
 }

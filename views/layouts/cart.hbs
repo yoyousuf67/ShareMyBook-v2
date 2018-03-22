@@ -78,16 +78,16 @@
               {{# each cartproducts as |val key|}}
           <div class="ui four column stackable celled grid">
               <div class="column">
-                <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
+                <a href="/book_view/{{val.book_id}}"><img class="ui bordered image" src="{{val.front_cover}}"/></a>
               </div>
               <div class="column">
-                <span><h4 class="ui header">{{val.bookname}} </h4>by {{val.author}}</span>
+                <span><a href="/book_view/{{val.book_id}}"><h4 class="ui header">{{val.bookname}} </h4></a>by {{val.author}}</span>
               </div>
             <div class="column">
               <span class="discount">&#x20b9;{{val.sp}}</span>
             </div>
             <div class="column">
-            <a onclick="remove_from_cart({{val.book_id}})">Remove from Cart</a>
+            <a onclick='remove_from_cart("{{val.book_id}}")'>Remove from Cart</a>
             </div>
           </div>
             {{/each}}

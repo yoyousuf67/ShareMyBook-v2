@@ -83,7 +83,3 @@ var logout = function(){
   function cart_display() {
     window.location.replace("/user/cart_display");
         }
-//Display books in cart
-  // function wishlist_display() {
-  // window.location.replace("/user/wishlist_display");
-  // }

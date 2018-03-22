@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const router = express.Router();
 const init = require('../authentication/passport');
@@ -6,11 +7,11 @@ const passport = require('../authentication/local');
 var promise = require('bluebird');
 //setup db
 const db_config={
-host: 'localhost', // server name or IP address;
-port: 5432,
-database: 'smb',
-user: 'user',
-password: 'root',
+host: process.env.HOST, // server name or IP address;
+port: process.env.PORT||5432,
+database: process.env.DATABASE,
+user: process.env.USER,
+password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);

@@ -9,6 +9,16 @@
      <script src="/javascripts/book_view.js">
      </script>
 <link rel="stylesheet" href="/stylesheets/style.css">
+<style>
+#overlay {
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+  display: block;
+  background-image: url('{{img}}');
+  background-repeat: no-repeat;
+}
+</style>
   </head>
   <body>
     <div class="ui padded stackable grid">
@@ -88,7 +98,7 @@
             <div class="content">
             <div class="transition hidden">
                 <a class="item" href="/show_sorted_books_by_tog/type/Paperback/0">Paperback</a>
-                <a class="item" href="/show_sorted_books_by_tog/type/HardCover/0">Hard Cover</a>
+                <a class="item" href="/show_sorted_books_by_tog/type/Hardcover/0">Hard Cover</a>
                 <a class="item" href="/show_sorted_books_by_tog/type/Ebook/0">Ebook</a>
             </div>
             </div>
@@ -139,7 +149,7 @@
          </div>
     	<div class="column">
         <div class="segment">
-          <img class="ui bordered image" id="imgZoom" width="300px" height="300px" onmousemove="zoomIn(event)" onmouseout="zoomOut()" src="http://ginger-mum.com/wp-content/uploads/2015/10/3633-1269758855-0da5042c33400a811a5d766be4579cb8.jpg">
+          <img class="ui bordered image" id="imgZoom" width="300px" height="300px" onmousemove="zoomIn(event)" onmouseout="zoomOut()" src="{{mimg}}">
         </div>
     	</div>
       <div class="column">
@@ -151,8 +161,8 @@
             <br>
             {{book.description}}</div>
             <br>
-             <a class="ui teal button {{disablecart}} cart{{book.book_id}}" onclick="add_to_cart({{book.book_id}})"><i class="cart plus icon"></i>Add to Cart</a>
-             <a class="ui yellow button wishlist{{book.book_id}} {{disablewishlist}}" onclick="add_to_wishlist({{book.book_id}})"><i class="bookmark icon"></i>Add to Wishlist</a>
+             <a class="ui teal button {{disablecart}} cart{{book.book_id}}" onclick='add_to_cart("{{book.book_id}}")'><i class="cart plus icon"></i>Add to Cart</a>
+             <a class="ui yellow button wishlist{{book.book_id}} {{disablewishlist}}" onclick='add_to_wishlist("{{book.book_id}}")'><i class="bookmark icon"></i>Add to Wishlist</a>
       </div>
     </div>
   </div>

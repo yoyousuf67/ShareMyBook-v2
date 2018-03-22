@@ -87,7 +87,7 @@
             <div class="content">
             <div class="transition hidden">
                 <a class="item" href="/show_sorted_books_by_tog/type/Paperback/0" id="Paperback">Paperback</a>
-                <a class="item" href="/show_sorted_books_by_tog/type/HardCover/0" id="Hard Cover">Hard Cover</a>
+                <a class="item" href="/show_sorted_books_by_tog/type/Hardcover/0" id="Hard Cover">Hard Cover</a>
                 <a class="item" href="/show_sorted_books_by_tog/type/Ebook/0" id="Ebook">Ebook</a>
             </div>
             </div>
@@ -144,6 +144,8 @@
                <h3 class="header">SELECTED CATEGORY</h3>
            </div>
            <div class="ui padded segment">
+             <div class="ui inline cookie nag">
+            </div>
              <div class="ui three column equal width stackable celled center aligned grid">
                {{# if condition}}
                <div class="column">
@@ -152,16 +154,16 @@
                {{/if}}
                {{# each sortedproducts as |val key|}}
                <div class="column">
-                 <div class="ui container">
+                 <div class="ui container cart{{val.book_id}} wishlist{{val.book_id}}">
                    <div class="item">
                      <div class="ui blurring image">  <div class="ui dimmer">
                        <div class="content">
-                         <a class="ui inverted teal button" onclick="add_to_cart({{val.book_id}})"><i class="cart plus icon"></i></a>
-                         <a class="ui inverted yellow button"><i class="bookmark icon"></i></a>
+                         <a class="ui inverted teal button" onclick='add_to_cart("{{val.book_id}}")'><i class="cart plus icon"></i></a>
+                         <a class="ui inverted yellow button" onclick='add_to_wishlist("{{val.book_id}}")'><i class="bookmark icon"></i></a>
                          <a class="ui inverted red button" href="/book_view/{{val.book_id}}">View</a>
                        </div>
                      </div>
-                     <img class="ui bordered image" src="http://via.placeholder.com/200x200"/>
+                     <img class="ui bordered image" src="{{val.front_cover}}"/>
                    </div>
                    </div>
                    <div class="item">

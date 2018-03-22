@@ -7,13 +7,14 @@
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
-     <script src="/ui/book_view.js">
-     </script>
-<link rel="stylesheet" href="/ui/style.css">
+     <script src="/javascripts/book_view.js"></script>
+<link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <div class="ui padded stackable grid">
-      <div class="black column">
+      <div class="one wide black column computer only">
+      </div>
+      <div class="fifteen wide black column">
         <div class="ui segments">
           <div class="ui left floated inverted segment">
             <a href="/display_books"><img  class="ui image computer only grid"src="/images/smblogo2.PNG" alt="Logo"></a>
@@ -26,10 +27,10 @@
             <div class="ui icon top right pointing dropdown button">
               <i class="big align justify icon"></i>
               <div class="menu">
-                <div class="item"><i class="large user icon"></i><a class="header">My Account</a></div>
-                <div class="item"><i class="large bookmark icon"></i><a class="header">My Wishlist</a></div>
-                <div class="item"><i class="large book icon"></i><a>My Books for Sale</a></div>
-                <div class="item"><i class="large sign out alternate icon"></i><a>Logout</a></div>
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
+                  <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
                 <div class="ui section divider"></div>
                 <div class="ui red header">Welcome to our Online Store</div>
                 <div class="ui section divider"></div>
@@ -39,32 +40,213 @@
         </div>
       </div>
     </div>
+    <!--book form-->
     <div class="ui stackable grid">
       <div class="three wide column computer only"></div>
       <div class="ui ten wide column">
-        <div class="ui raised padded segment">
-  <form class="ui form" method="post" action="/template">
-    <h3>
-      BOOK DETAILS:
-    </h3>
-    <div class="ui divider"></div>
-    <p>Terms and Conditions: <br>
-    1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
-    2.The resale value cannot be more than 40% of MRP.</p>
-    <div class="ui divider"></div>
-    <div class="part1">
-          <label class="ui inverted teal label">Book Name</label><br>
-          <input class="ui seven wide field" type="text" name="Bookname" placeholder="Book Name"><br><br>
-          <label class="ui inverted teal label">Author</label><br>
-          <input class="seven wide field" type="text" name="Author" placeholder="Author"><br><br>
-          <label class="ui teal label">MRP</label><br>
-          <input class="ui seven wide field" type="number" name="mrp" placeholder="MRP"><br><br>
-          <label class="ui teal label">Selling Price</label><br>
-          <input class="ui seven wide field" type="number" name="sp" placeholder="Selling Price"><br><br>
-          <button class="ui teal labeled icon button"><i class="angle right icon"></i>Next</button><br>
+        <div class="ui one wide column computer only">
 
+        </div>
+        <div class="ui raised padded segment" id="segment1">
+      <form class="ui form" id='part1'>
+        <h3>
+          BOOK DETAILS:
+        </h3>
+        <div class="ui divider"></div>
+        <p>Terms and Conditions: <br>
+        1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
+        2.The resale value cannot be more than 40% of MRP.</p>
+        <div class="ui divider"></div>
+        <h4>Part 1 of 3</h4>
+        <div class="field">
+        <label class="ui inverted teal label" >Book Name</label><br>
+        <input class="field-custom" type="text" name="bookname" placeholder="Book Name"><br><br>
+      </div>
+      <div class="field">
+        <label class="ui inverted teal label" for="Author">Author</label><br>
+        <input  type="text" name="author" placeholder="Author"><br><br>
+      </div>
+      <div class="field">
+        <label class="ui teal label" for="mrp">MRP</label><br>
+        <input  type="number" name="mrp" placeholder="MRP"><br><br>
+      </div>
+      <div class="field">
+        <label class="ui teal label" for="sp">Selling Price</label><br>
+        <input  type="number" name="sp" placeholder="Selling Price"><br><br>
+      </div>
+      <button class="ui teal labeled icon button" type="submit"><i class="angle right icon"></i>Next</button><br>
+      </form>
+      <script>
+      $('#part1').form({
+        on: 'blur',
+        inline: true,
+        delay: false,
+        fields: {
+          bookname: {
+            identifier: 'bookname',
+            rules: [{
+                 type   : 'empty',
+                 prompt : 'Please enter a valid Book name',
+               }]
+          },
+          author: {
+            identifier: 'author',
+            rules: [{
+                 type   : 'empty',
+                 prompt : 'Please enter a valid Author name',
+               }]
+          },
+          mrp: {
+            identifier: 'mrp',
+            rules: [{
+                 type   : 'empty',
+                 prompt : 'Please enter a valid MRP',
+               }]
+          },
+          sp: {
+            identifier: 'sp',
+            rules: [{
+                 type   : 'empty',
+                 prompt : 'Please enter a valid Selling Price',
+               }]
+          }
+        },
+        onSuccess:function(event, fields){
+          event.preventDefault();
+        finalevent("first",$("#part1").serializeArray());
+      $('#segment1').addClass("loading");
+    setTimeout(function () {
+        $('#segment1').removeClass("loading");
+        $('#segment1').hide();
+      $('#segment2').show();
+    },1000);
+        }
+      });
+      </script>
     </div>
-<!--  <div class="part3" style="display:none">
+<div class="ui raised padded segment" id="segment2" style="display:none">
+      <form class="ui form" id='part2'>
+        <h3>
+          BOOK DETAILS:
+        </h3>
+        <div class="ui divider"></div>
+        <p>Terms and Conditions: <br>
+        1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
+        2.The resale value cannot be more than 40% of MRP.</p>
+        <div class="ui divider"></div>
+        <h4>Part 2 of 3</h4>
+        <div class="field">
+          <label class="ui teal label">Book Type</label><br>
+      <div class="ui search selection dropdown ten wide field" id="Booktype">
+      <input type="hidden" name="Booktype" >
+      <i class="dropdown icon"></i>
+      <div class="default text">Book Type</div>
+      <div class="menu">
+        <div class="item" data-value="Magazines">Magazines </div>
+        <div class="item" data-value="Comics">Comics </div>
+        <div class="item" data-value="Paperback">Paperback </div>
+        <div class="item" data-value="Hardcover">Hardcover</div>
+        <div class="item" data-value="Ebook">Ebook</div>
+      </div>
+      </div><br><br>
+        </div>
+        <div class="field">
+          <label class="ui teal label" for="Language">Language</label><br>
+        <div class="ui search selection dropdown ten wide field">
+      <input type="hidden" name="Language" >
+      <i class="dropdown icon"></i>
+      <div class="default text">Book Language</div>
+      <div class="menu">
+        <div class="item" data-value="Assamese">Assamese </div>
+                   <div class="item" data-value="Bengali">Bengali</div>
+                   <div class="item" data-value="English">English</div>
+                   <div class="item" data-value="Gujarati">Gujarati</div>
+                   <div class="item" data-value="Hindi">Hindi</div>
+                   <div class="item" data-value="Kannada">Kannada</div>
+                   <div class="item" data-value="Marathi">Marathi</div>
+                   <div class="item" data-value="Odia">Odia</div>
+                   <div class="item" data-value="Tamil">Tamil</div>
+                   <div class="item" data-value="Telugu">Telugu</div>
+                   <div class="item" data-value="Urdu">Urdu</div>
+                   <div class="item" data-value="Other">Other</div>
+      </div>
+    </div>
+      </div><br><br>
+      <div class="field">
+        <label class="ui teal label">Select Category</label><br>
+         <div class="ui search selection dropdown ten wide field" id="Category">
+       <input type="hidden" name="Category" >
+       <i class="dropdown icon"></i>
+       <div class="default text">Category</div>
+       <div class="menu">
+         <div class="item" data-value="Education and Professional Books">Education and Professional Books</div>
+                    <div class="item" data-value="Fiction and Non-fiction">Fiction and Non-Fiction</div>
+                    <div class="item" data-value="Philosophy">Philosophy</div>
+                    <div class="item" data-value="Religion and Spirituality">Religion and Spirituality</div>
+                    <div class="item" data-value="Reference Books">Reference Books</div>
+                    <div class="item" data-value="Self Help">Self Help</div>
+                    <div class="item" data-value="Hobbies and Interests">Hobbies and Interests</div>
+                    <div class="item" data-value="Other">Other</div>
+       </div>
+     </div><br><br>
+      </div>
+      <div class="field">
+        <div class="label" for="description">Description</div>
+        <textarea rows="3" placeholder="Description" name="description"></textarea>
+      <br>
+    </div>
+      <button class="ui teal labeled icon button" onclick="partmanager('segment1','segment2')"><i class="angle left icon"></i>Back</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="ui teal labeled icon button" type="submit"><i class="angle right icon"></i>Next</button><br>
+      </form>
+      <script>
+      $('#part2')
+.form({
+fields: {
+Booktype  :{
+  identifier: 'Booktype',
+  rules: [{
+       type   : 'empty',
+       prompt : 'Please select a Booktype',
+     }]
+},
+Language  :{
+  identifier: 'Language',
+  rules: [{
+       type   : 'empty',
+       prompt : 'Please select a Language',
+     }]
+},
+Category  :{
+  identifier: 'Category',
+  rules: [{
+       type   : 'empty',
+       prompt : 'Please select a Category',
+     }]
+},
+description  :{
+  identifier: 'description',
+  rules: [{
+       type   : 'empty',
+       prompt : 'Please fill in some description',
+     }]
+}
+},
+onSuccess:function(event, fields){
+  event.preventDefault();
+finalevent("second",$("#part2").serializeArray());
+$('#segment2').addClass("loading");
+setTimeout(function () {
+      $('#segment2').removeClass("loading");
+    $('#segment2').hide();
+$('#segment3').show();
+},1000);
+}
+})
+;
+</script>
+</div>
+    <div class="ui raised padded segment" id="segment3" style="display:none">
+  <form class="ui form" id='part3' enctype="multipart/form-data">
     <h3>
       BOOK DETAILS:
     </h3>
@@ -72,70 +254,88 @@
     <p>Terms and Conditions: <br>
     1.Fill in the details correctly or else you may be blocked from website if found guilty.<br>
     2.The resale value cannot be more than 40% of MRP.</p>
-    <label class="ui inverted teal label">Upload Front Cover of Your Book</label><br>
-  <input class="seven wide field" type='file' name="Bookcover" accept="image/*" onchange="readURL(this);"  />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img id="uploadimg" src="http://via.placeholder.com/200x200" alt="your image" /><br><br>
-    <button class="ui teal labeled icon button"  onclick="partmanager('part3','part2')"><i class="angle left icon"></i>Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <button class="ui teal labeled icon button" tabindex="0"><i class="sign in icon"></i>
-    Submit</button>
-  </div>-->
-<br>
-  <br>
-  </form><br>
+    <div class="ui divider"></div>
+    <h4>Part 3 of 3</h4>
+    <div class="field">
+      <label class="ui teal label">Upload Front Cover of Your Book</label><br>
+  <input class="ten wide field" type='file' name="Bookcover" accept="image/*" onchange="readURL(this);"  /><br>
+      <img id="uploadimg" src="http://via.placeholder.com/400x400" alt="your image" /><br><br>
+  </div>
+  <button class="ui teal labeled icon button" onclick="partmanager('segment2','segment3')"><i class="angle left icon"></i>Back</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="ui teal labeled icon button" type="submit" id="kill"><i class="sign in icon"></i>Submit</button><br>
+  </form>
+  <script>
+var post_data,arr;
+  function finalevent(segmentno,data) {
+    console.log(data);
+    if (segmentno=="second") {
+      arr =$.merge(post_data,data);
+    }
+    else if(segmentno="first") {
+    post_data=$.merge([],data);
+    }
+    console.log(arr);
+  }
+  $('#part3').form({
+    fields: {
+      Bookcover:'empty'
+    },
+  });
+  $('#kill').click(function(event, fields){
+    event.preventDefault();
+    console.log("sec");
+      var file_data = $('#part3')[0];
+  var formData = new FormData(file_data);
+  $.each(arr,function(key,input){
+    formData.append(input.name,input.value);
+              $('#part3').addClass('loading')
+});
+  $.ajax({
+      url: 'http://localhost:8080/addbook',
+      type: 'POST',
+      data: formData,
+      success: function (data) {
+          window.location.replace("/account_info/my_books_for_sale");
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+  });
+});
+  </script>
 </div>
+<br>
 </div>
 <div class="three wide column computer only"></div>
 </div>
-    <!--footer-->
-    <div class="ui inverted vertical footer segment form-page">
-      <div class="ui container">
-    <i class="copyright outline icon"></i> 2018 ShareMyBook. All Rights Reserved.&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a>About us</a>&emsp;&emsp;<a> Contact us</a>
-      </div>
-    </div>
-    </body>
-    <script>
-          $('.ui.dropdown.seven.wide.field').dropdown();
-      $('.ui.rating').rating('setting', 'onRate', function(value) {
-      $('#Starrating').attr("value",value);
-      });
-
-            function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('#uploadimg')
-                    .attr('src', e.target.result)
-                    .width(200)
-                    .height(200);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-  $('.ui.form')
-  .form({
-  fields: {
-  Bookname  : 'empty',
-  mrp :'empty',
-  sp :'empty',
-  Author     :'empty',
-  Bookcover     :'empty',
-  Booktype  :'empty',
-  Language  :'empty',
-  Category  :'empty'
-  }
-  })
-  ;
-  </script>
+  </body>
   <script type="text/javascript">
-    function partmanager(hide,show){
-      var qs=document.querySelectorAll('.'+hide);
-      if(qs[0]){
-        qs[0].style.display='none';
-      }
-      document.querySelector('.'+show).style.display='block';
-    }
-    $('.ui.dropdown').dropdown({on: 'click'});
-    $('.ui.icon.button').popup({on: 'click'});
+  $('.ui.dropdown').dropdown({on: 'click'});
+  $('.ui.icon.button').popup({on: 'click'});
+  function partmanager(back,current){
+    setTimeout(function () {
+      $('#'+current+'').addClass("loading");
+    },0);
+    setTimeout(function () {
+            $('#'+current+'').removeClass("loading");
+            $('#'+current+'').hide();
+            $('#'+back).show();
+    },1000);
+  }
   </script>
+  <script>
+          function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+              $('#uploadimg')
+                  .attr('src', e.target.result)
+                  .width(200)
+                  .height(200);
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+</script>
 </html>
