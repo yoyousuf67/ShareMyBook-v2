@@ -81,6 +81,7 @@ router.get('/:bookId',function (req,res,next) {
 router.get('/:limit/specials/:offset?',function (req,res,next) {
   var limit=req.params.limit;
   var offset=req.params.offset;
+  console.log(limit);
   if (!offset) {
     db.any('SELECT * from book_info where is_special=$1 AND is_blocked=$2 AND is_sold=$3 order by created_at desc limit $4', ["true","false","false",limit])
       .then(function(data) {
@@ -99,7 +100,7 @@ router.get('/:limit/specials/:offset?',function (req,res,next) {
       });
   }
   else{
-  db.any('SELECT * from book_info where is_special=$1 AND is_blocked=$2 AND is_sold=$3 order by created_at desc offset $4 limit $3', [true,"false","false",offset,limit])
+  db.any('SELECT * from book_info where is_special=$1 AND is_blocked=$2 AND is_sold=$3 order by created_at desc offset $4 limit $5', [true,"false","false",offset,limit])
     .then(function(data) {
       res.status(200).json({
         status:'success',
