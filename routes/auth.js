@@ -15,7 +15,7 @@ password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);
-const db=pgp(db_config);
+const db=pgp(process.env.DATABASE_URL);
 init();
 router.post('/register',authHelpers.loginRedirect, (req,res,next)  => {
   return authHelpers.createUser(req,res)
@@ -56,7 +56,6 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
 
 router.get('/testbase', (req, res, next) => {
   console.log("yo");
-  console.log(process.env.USER);
   db.any('Select * from account_info')
   .then(function(data) {
     res.status(200).json({
