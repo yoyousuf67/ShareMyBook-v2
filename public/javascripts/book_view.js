@@ -38,7 +38,7 @@ function add_to_cart(book_id) {
   $(".wishlist"+book_id).addClass("disabledbutton");
   }
   });
-  xhr.open("GET", "http://localhost:8080/book/add_to_cart/"+book_id);
+  xhr.open("GET", "https://thawing-fortress-74054.herokuapp.com/book/add_to_cart/"+book_id);
   xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(data);
 }
@@ -59,7 +59,7 @@ function add_to_wishlist(book_id) {
 //  $('.ui.inline.nag.cookie.'+book_id).nag('show');
   }
   });
-  xhr.open("GET", "http://localhost:8080/book/add_to_wishlist/"+book_id);
+  xhr.open("GET", "https://thawing-fortress-74054.herokuapp.com/book/add_to_wishlist/"+book_id);
   xhr.setRequestHeader("cache-control", "no-cache");
   xhr.send(data);
 }
@@ -74,7 +74,7 @@ var logout = function(){
       window.location.href = '/';
     }
   });
-  xhr.open("GET", "http://localhost:8080/auth/logout");
+  xhr.open("GET", "https://thawing-fortress-74054.herokuapp.com/auth/logout");
   xhr.setRequestHeader("content-type", "application/json");
   xhr.send(data);
       }
