@@ -229,7 +229,7 @@ else{var books=[];}
     if (by=="specials") {
       var limit=9;
       var options = { method: 'GET',
-      url: 'https://sharemybook.herokuapp.com/book/9/specials'+offset_value
+      url: 'https://sharemybook.herokuapp.com/book/9/specials/'+offset_value
       };
     }
     else{
