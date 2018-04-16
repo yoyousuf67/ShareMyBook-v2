@@ -45,11 +45,11 @@
       <!--Search Bar and Cart-->
     <div class="row">
       <!--Search Bar-->
-        <div class="column">
-          <div class="ui icon input">
-          <input type="text" placeholder="Search...">
-          <i class="search icon"></i>
-        </div>
+      <div class="column">
+        <div class="ui icon input search">
+        <input type="text" class="prompt" placeholder="Search...">
+        <i class="search icon"></i>
+      </div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <!--Cart-->
         <a onclick="cart_display()" class="ui floating labeled teal icon dropdown button">
@@ -118,12 +118,12 @@
           <!--Search Bar and Cart-->
         <div class="row">
           <!--Search Bar-->
-            <div class="thirteen wide column">
-              <div class="ui icon fluid big input">
-              <input type="text" placeholder="Search...">
-              <i class="search icon"></i>
-            </div>
-            </div>
+          <div class="thirteen wide column">
+            <div class="ui icon fluid big input search">
+            <input type="text" class="prompt" placeholder="Search..."/>
+            <i class="search icon"></i>
+          </div>
+          </div>
             <!--Cart-->
             <div class=" column">
               <a onclick="cart_display()" class="ui floating labeled teal icon dropdown big button">
@@ -200,5 +200,17 @@
     $('.ui.accordion').accordion('refresh');
     $('#{{active}}').addClass('active');
     $('#{{active_tog}}').addClass('active teal');
+    $('.ui.search').search({
+      apiSettings: {
+          url: '//localhost:8080/book/book/search_api?q={query}'
+        },
+        fields: {
+          results : 'data',
+          title   : 'bookname',
+          description: 'author',
+          url     : 'book_id'
+        },
+        minCharacters : 3
+    });
   </script>
 </html>

@@ -555,6 +555,28 @@ router.put('/book/is_sold',function (req,res,next) {
 });
 
 
+router.get('/book/search_api',function (req,res,next) {
+  var bookname=req.query.q;
+  console.log(bookname);
+  db.any("SELECT book_id, bookname , author from book_info where is_blocked=$1 AND is_sold=$2 AND bookname ILIKE '%"+bookname+"%' order by created_at", ["false","false"])
+    .then(function(data) {
+      for (var i = 0; i < data.length; i++) {
+        data[i].book_id="http://localhost:8080/book_view/"+data[i].book_id;
+      }
+      res.status(200).json({
+        status:'success',
+        message: "Search Books API",
+        data: data
+      });
+        // success;
+    })
+    .catch(function(error) {
+        // error;
+        return next(error);
+    });
+
+});
+
 router.get('/book/test',function (req,res,next) {
   var cart=req.user.cart;
   console.log(req.user.cart);
