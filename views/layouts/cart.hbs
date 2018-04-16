@@ -45,10 +45,13 @@
     <div class="ui one column grid mobile only">
       <br>
       <div class="ui padded segment">
-        <h3>Subtotal 3 Items: &#x20b9;600</h3>
-        <div class="ui teal button">
-          Proceed to checkout
-        </div>
+        <h3>Subtotal {{cart_len}} Items: &#x20b9;&nbsp;{{book_sp}}</h3>
+        <form class="checkout_form" method="post" action="/checkout">
+          <button type="submit" class="ui teal button">
+            Proceed to checkout
+          </button>
+          <input type="hidden" name="booksp" value="{{book_sp}}" id="hi">
+        </form>
       </div>
       <br>
     </div>
@@ -100,10 +103,45 @@
       <div class=" ui four wide column grid computer only">
         <br><br><br><br>
         <div class="ui padded segment">
-          <h3>Subtotal 3 Items: &#x20b9;600</h3>
-          <div class="ui teal button">
-            Proceed to checkout
-          </div>
+          <h3>Subtotal {{cart_len}} Items: &#x20b9;&nbsp;{{book_sp}}</h3>
+          <form class="checkout_form" method="post" action="/checkout">
+            <button type="submit" class="ui teal button">
+              Proceed to checkout
+            </button>
+            <input type="hidden" name="booksp" value="{{book_sp}}">
+          </form>
+          <script type="text/javascript">
+              $(".checkout_form").on('submit',function (e) {
+                e.preventDefault();
+                var cart_arr="";
+                {{# each cartproducts as |val key|}}
+                cart_arr=cart_arr+"book_id{{key}}={{val.book_id}}&"
+                {{/each}}
+                cart_arr= cart_arr.slice(0,-1);
+                console.log(cart_arr);
+                var settings = {
+                      "async": true,
+                      "crossDomain": true,
+                      "url": "http://localhost:8080/book/book/is_processed?"+cart_arr,
+                      "method": "PUT",
+                      "headers": {
+                        "Cache-Control": "no-cache",
+                      }
+                    }
+
+                    $.ajax(settings).done(function (response,textStatus, xhr) {
+                      if(xhr.status==204){
+                        $("body").html("The selected book is under processing. Please try again later or select another book");
+                        setTimeout(function () {
+                          location.reload();
+                        },1000)
+                      }else if (xhr.status==200) {
+                        console.log("bro");
+                        $('<form action="/checkout" method="post"><input type="hidden" name="booksp" value="{{book_sp}}"></form>').appendTo('body').submit();
+                      }
+                    });
+              })
+          </script>
         </div>
   </div>
 </div>
@@ -117,6 +155,9 @@
 $('.ui.dropdown').dropdown({on: 'click'});
 $('.ui.image').dimmer({on: 'hover'});
 $('.ui.icon.button').popup({on: 'click'});
+if($('#hi').val()==0){
+$('.ui.teal.button').addClass('disabledbutton');
+}
 </script>
 <script>
 function remove_from_cart(book_id) {

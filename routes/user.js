@@ -374,12 +374,17 @@ router.get('/user/cart_display',function (req,res,next) {
         request(options, function (error, response, body) {
           if (error) throw new Error(error);
 
-          //console.log(body);
-          res.render('cart',{cartproducts:body.data});
+          //console.log(body.data);
+          var amt=0;
+          for (var i = 0; i < body.data.length; i++) {
+            amt=amt+body.data[i].sp;
+          }
+          //console.log(amt);
+          res.render('cart',{cartproducts:body.data,cart_len:req.user.cart.length,book_sp: amt});
         });
   }
   else{
-    res.render('cart',{condition:true});}
+    res.render('cart',{condition:true,cart_len:0,book_sp:0});}
 }
 });
 
@@ -445,6 +450,7 @@ form.parse(req)
           newarr.splice(0, 0, book_id);
           newarr.splice(1, 0, username);
           newarr.splice(9, 0, front_cover);
+          newarr.splice(11, 0, 'false');
           console.log(newarr);
           var options = { method: 'GET',
             url: 'http://localhost:8080/book/book/add_book',
@@ -470,4 +476,17 @@ form.parse(req)
   }
   });
 
+  router.post('/checkout',function (req,res,next) {
+    if (!req.user) {
+      res.redirect('/');
+    }else{
+      var booksp=req.body.booksp;
+      console.log(booksp);
+    res.render('checkout',{book_sp:booksp});
+  }
+  });
+
+  router.get('/test',function (req,res,next) {
+    res.render('checkout');
+  });
 module.exports = router;

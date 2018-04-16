@@ -68,15 +68,18 @@
       </div>
       <div class="field">
         <label class="ui teal label" for="mrp">MRP</label><br>
-        <input  type="number" name="mrp" placeholder="MRP"><br><br>
+        <input  type="number" name="mrp" id="mrp" placeholder="MRP" min="0"><br><br>
       </div>
       <div class="field">
         <label class="ui teal label" for="sp">Selling Price</label><br>
-        <input  type="number" name="sp" placeholder="Selling Price"><br><br>
+        <input  type="number" name="sp" id="sp" placeholder="Selling Price" min="0"><br><br>
       </div>
       <button class="ui teal labeled icon button" type="submit"><i class="angle right icon"></i>Next</button><br>
       </form>
       <script>
+      $.fn.form.settings.rules.maxsp = function(value) {
+      return (Math.ceil($('#mrp').val()*4/10) >= $('#sp').val())
+    };
       $('#part1').form({
         on: 'blur',
         inline: true,
@@ -101,14 +104,23 @@
             rules: [{
                  type   : 'empty',
                  prompt : 'Please enter a valid MRP',
-               }]
+               },
+               {
+            type   : 'maxLength[4]',
+            prompt : 'MRP cannot be greater than 9999 '
+          }]
           },
           sp: {
             identifier: 'sp',
             rules: [{
                  type   : 'empty',
                  prompt : 'Please enter a valid Selling Price',
-               }]
+               },
+               {
+            type: 'maxsp',
+            prompt: 'Selling Price must be less than 40%'
+          }
+]
           }
         },
         onSuccess:function(event, fields){
@@ -195,7 +207,7 @@
         <textarea rows="3" placeholder="Description" name="description"></textarea>
       <br>
     </div>
-      <button class="ui teal labeled icon button" onclick="partmanager('segment1','segment2')"><i class="angle left icon"></i>Back</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="ui teal labeled icon button" type="button" onclick="partmanager('segment1','segment2')"><i class="angle left icon"></i>Back</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="ui teal labeled icon button" type="submit"><i class="angle right icon"></i>Next</button><br>
       </form>
       <script>
@@ -337,5 +349,12 @@ var post_data,arr;
           reader.readAsDataURL(input.files[0]);
       }
   }
+
+        $('#mrp').keyup(
+        function() {
+          //  console.log(Math.ceil($('#mrp').val()*4/10));
+            $('#sp').attr('placeholder', 'Max SP = '+Math.ceil($('#mrp').val()*4/10))
+        });
+
 </script>
 </html>

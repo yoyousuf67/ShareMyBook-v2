@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ShareMyBook</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png"/>
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
+     <script src="/javascripts/book_view.js"></script>
+  </head>
+  <body>
+    <div class="ui padded stackable grid">
+      <div class="one wide black column computer only">
+      </div>
+      <div class="fifteen wide black column">
+        <div class="ui segments">
+          <div class="ui left floated inverted segment">
+            <a href="/display_books"><img  class="ui image computer only grid"src="/images/smblogo2.PNG" alt="Logo"></a>
+          </div>
+          <div class="ui left floated inverted segment">
+            <a href="/display_books"><img class="ui small image mobile only grid" src="/images/smblogo2.PNG" alt="Logo"></a>
+          </div>
+          <!--Top Right Menu-->
+          <div class=" ui right floated inverted segment">
+            <div class="ui icon top right pointing dropdown button">
+              <i class="big align justify icon"></i>
+              <div class="menu">
+                <a class="item" href="/account_info/account"><i class="large user icon black"></i>My Account</a>
+                <a class="item" href="/account_info/wishlist"><i class="large bookmark icon black"></i>My Wishlist</a>
+                  <a class="item" href="/account_info/my_books_for_sale"><i class="large book icon black"></i>My Books for Sale</a>
+                  <a class="item" onclick="logout()"><i class="large sign out alternate icon black"></i>Logout</a>
+                <div class="ui section divider"></div>
+                <div class="ui red header">Welcome to our Online Store</div>
+                <div class="ui section divider"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <h2 style="color:red">Warning: A time of fifteen minute is allowed after which you will be redirected to previous page.</h2>
+    <div class="ui padded stackable grid">
+      <div class="row">
+        <div class="one wide column computer only">
+        </div>
+        <div class="ui padded inverted teal segment">
+          <h3>Subtotal: &#x20b9;&nbsp; {{book_sp}}</h3>
+        </div>
+              <br>
+      </div>
+      <div class="one wide column computer only">
+      </div>
+    <form class="ui form" name="payment">
+  <h4 class="ui dividing header">Shipping Information</h4>
+  <div class="field">
+    <label>Name</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="text" name="shipping_first_name" placeholder="First Name">
+      </div>
+      <div class="field">
+        <input type="text" name="shipping_last_name" placeholder="Last Name">
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Billing Address</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <input type="text" name="shipping_address" placeholder="Street Address">
+      </div>
+      <div class="four wide field">
+        <input type="text" name="city" placeholder="City">
+      </div>
+    </div>
+  </div>
+  <div class="two fields">
+    <div class="field">
+      <label>State</label>
+      <select class="ui fluid dropdown" name="state">
+        <option value="">State</option>
+        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands </option>
+         <option value="Andhra Pradesh">Andhra Pradesh</option>
+         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+         <option value="Assam">Assam</option>
+         <option value="Bihar">Bihar</option>
+         <option value="Chattisgarh">Chhattisgarh</option>
+         <option value="Dadra and Nager Haveli">Dadra and Nagar Haveli </option>
+         <option value="Daman and Diu">Daman and Diu</option>
+         <option value="Delhi">Delhi </option>
+         <option value="Goa">Goa</option>
+         <option value="Gujarat">Gujarat</option>
+         <option value="Haryana">Haryana</option>
+         <option value="Himachal Pradesh">Himachal Pradesh</option>
+         <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+         <option value="Jharkhand">Jharkhand</option>
+         <option value="Karnataka">Karnataka</option>
+         <option value="Kerala">Kerala</option>
+         <option value="Lakshadweep">Lakshadweep</option>
+         <option value="Madhya Pradesh">Madhya Pradesh</option>
+         <option value="Maharashtra">Maharashtra</option>
+         <option value="Manipur">Manipur</option>
+         <option value="Meghalaya">Meghalaya</option>
+         <option value="Mizoram">Mizoram</option>
+         <option value="Nagaland">Nagaland</option>
+         <option value="Odisha">Odisha</option>
+         <option value="Puducherry">Puducherry</option>
+         <option value="Punjab">Punjab</option>
+         <option value="Rajasthan">Rajasthan</option>
+         <option value="Sikkim">Sikkim</option>
+         <option value="Tamil Nadu">Tamil Nadu</option>
+         <option value="Telangana">Telangana</option>
+         <option value="Tripura">Tripura</option>
+         <option value="Uttar Pradesh">Uttar Pradesh</option>
+         <option value="Uttarakhand">Uttarakhand</option>
+         <option value="West Bengal">West Bengal</option>
+      </select>
+    </div>
+    <div class="field">
+          <label>PIN Code</label>
+      <input type="text" maxlength="6" name="pin" placeholder="PIN Code">
+    </div>
+  </div>
+  <h4 class="ui dividing header">Billing Information</h4>
+  <div class="field">
+    <label>Card Type</label>
+    <div class="ui selection dropdown">
+      <input type="hidden" name="card_type">
+      <div class="default text">Type</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <div class="item" data-value="visa">
+          <i class="visa icon"></i>
+          Visa
+        </div>
+        <div class="item" data-value="amex">
+          <i class="amex icon"></i>
+          American Express
+        </div>
+        <div class="item" data-value="discover">
+          <i class="discover icon"></i>
+          Discover
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fields">
+    <div class="seven wide field">
+      <label>Card Number</label>
+      <input type="text" name="card_number" maxlength="16" placeholder="Card #">
+    </div>
+    <div class="three wide field">
+      <label>CVC</label>
+      <input type="text" name="card_cvc" maxlength="3" placeholder="CVC">
+    </div>
+    <div class="six wide field">
+      <label>Expiration</label>
+      <div class="two fields">
+        <div class="field">
+          <select class="ui fluid search dropdown" name="card_expire_month">
+            <option value="">Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+        <div class="field">
+          <input type="text" name="card_year" maxlength="4" placeholder="Year">
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="ui button" tabindex="0">Submit Order</button>
+</form>
+</div>
+<br><br><br>
+<div class="ui inverted vertical footer segment form-page">
+  <div class="ui container">
+<i class="copyright outline icon"></i> 2018 ShareMyBook. All Rights Reserved.
+  </div>
+</div>
+<h3>{{book_id}}</h3>
+  </body>
+  <script type="text/javascript">
+  $('.ui.dropdown').dropdown({on: 'click'});
+  $('.ui.form')
+  .form({
+    fields: {
+      shipping_first_name     : 'empty',
+      shipping_last_name     : 'empty',
+      city   : 'empty',
+      shipping_address : 'empty',
+      shipping_address_2 : 'empty',
+      state : 'empty',
+      pin : 'empty',
+      card_type : 'empty',
+      card_number : 'empty',
+      card_cvc : 'empty',
+      card_expire_month : 'empty',
+      card_year : 'empty'
+    }
+  })
+;
+</script>
+<script type="text/javascript">
+  $('.ui.form').submit(function(e){
+    e.preventDefault();
+    var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://localhost:8080/book/book/is_sold",
+  "method": "PUT",
+  "headers": {
+    "Cache-Control": "no-cache",
+    "Postman-Token": "e143ec08-1d47-4ed0-9434-da11d7997812"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+  $('body').html(`<h2> Success! You will be redirected back in a few seconds. Do not press back button</h2>`);
+  var timer = setTimeout(function() {
+          window.location='http://localhost:8080'
+      }, 3000);
+});
+});
+  $(document).ready(function() {
+    setTimeout(function (){
+      console.log("hello");
+      try{window.location.replace("http://localhost:8080");}
+      catch(e){window.location="http://localhost:8080";}
+    },900000)
+  });
+</script>
+</html>

@@ -141,7 +141,6 @@ function render_form(data) {
       },
       contact_no: {
         identifier: 'contact_no',
-        optional   : true,
         rules: [{
              type   : 'exactLength[10]',
              prompt : 'Please enter a Contact No of ten digits',
