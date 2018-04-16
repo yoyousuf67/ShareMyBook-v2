@@ -93,6 +93,7 @@ router.get('/:limit/specials/:offset?',function (req,res,next) {
           // success;
       })
       .catch(function(error) {
+        console.log(error);
           // error;
           return next(error);
       });
