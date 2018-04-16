@@ -12,7 +12,7 @@ password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);
-const db=pgp(db_config);
+const db=pgp(process.env.DATABASE_URL);
 
 //show by book type
 router.get('/:offset/type/:param', function(req, res, next) {

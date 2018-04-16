@@ -54,23 +54,6 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   handleResponse(res, 200, 'success');
 });
 
-router.get('/testbase', (req, res, next) => {
-  console.log("yo");
-  db.any('Select * from account_info')
-  .then(function(data) {
-    res.status(200).json({
-      status:'success',
-      message: "yo",
-      data: data
-    });
-      // success;
-  })
-  .catch(function(error) {
-      // error;
-      return next(error);
-  });
-});
-
 function handleResponse(res, code, statusMsg) {
   res.status(code).json({status: statusMsg});
 }

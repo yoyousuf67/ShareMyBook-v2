@@ -11,7 +11,7 @@ password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);
-const db=pgp(db_config);
+const db=pgp(process.env.DATABASE_URL);
 
 function comparePass(userPassword, databasePassword) {
   return bcrypt.compareSync(userPassword, databasePassword);

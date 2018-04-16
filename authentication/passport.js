@@ -10,7 +10,7 @@ password: process.env.PASSWORD,
 promiseLib: promise
 };
 var pgp = require('pg-promise')(db_config);
-const db=pgp(db_config);
+const db=pgp(process.env.DATABASE_URL);
 module.exports = () => {
 
   passport.serializeUser((user, done) => {
