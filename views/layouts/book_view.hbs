@@ -159,7 +159,10 @@
             <div class="ui section divider"></div>
             <h3 class="ui header"><span class="discount">&#x20b9;{{book.sp}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="original">&#x20b9;{{book.mrp}}</span></h3>
             <br>
-            {{book.description}}</div>
+            <p style="color:teal">Language: {{book.language}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type: {{book.book_type}}</p>
+            <p style="color:teal">Category: {{book.category}}</p>
+            <h3>{{book.description}}</h3>
+          </div>
             <br>
              <a class="ui teal button {{disablecart}} cart{{book.book_id}}" onclick='add_to_cart("{{book.book_id}}")'><i class="cart plus icon"></i>Add to Cart</a>
              <a class="ui yellow button wishlist{{book.book_id}} {{disablewishlist}}" onclick='add_to_wishlist("{{book.book_id}}")'><i class="bookmark icon"></i>Add to Wishlist</a>

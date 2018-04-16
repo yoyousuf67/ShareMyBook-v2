@@ -219,7 +219,7 @@
     var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://localhost:8080/book/book/is_sold",
+  "url": "https://thawing-fortress-74054.herokuapp.com/book/book/is_sold",
   "method": "PUT",
   "headers": {
     "Cache-Control": "no-cache",
@@ -231,15 +231,15 @@ $.ajax(settings).done(function (response) {
   console.log(response);
   $('body').html(`<h2> Success! You will be redirected back in a few seconds. Do not press back button</h2>`);
   var timer = setTimeout(function() {
-          window.location='http://localhost:8080'
+          window.location='https://thawing-fortress-74054.herokuapp.com'
       }, 3000);
 });
 });
   $(document).ready(function() {
     setTimeout(function (){
       console.log("hello");
-      try{window.location.replace("http://localhost:8080");}
-      catch(e){window.location="http://localhost:8080";}
+      try{window.location.replace("https://thawing-fortress-74054.herokuapp.com");}
+      catch(e){window.location="https://thawing-fortress-74054.herokuapp.com";}
     },900000)
   });
 </script>

@@ -71,7 +71,7 @@ var books=req.user.books;
 else{var books=[];}
 //first request to fetch newproducts
     var options = { method: 'GET',
-    url: 'http://localhost:8080/book/0/newProduct/'
+    url: 'https://thawing-fortress-74054.herokuapp.com/book/0/newProduct/'
     };
     request(options, function (error, response, body) {
     if (error) throw new Error(error);
@@ -80,7 +80,7 @@ else{var books=[];}
 
     //second request to fetch specials
       var options = { method: 'GET',
-      url: 'http://localhost:8080/book/3/specials'
+      url: 'https://thawing-fortress-74054.herokuapp.com/book/3/specials'
       };
 
       request(options, function (error, response, body) {
@@ -155,7 +155,7 @@ else{
     var book_id=req.params.book_id;
     console.log("book id "+book_id);
     var options = { method: 'GET',
-      url: 'http://localhost:8080/book/'+book_id,
+      url: 'https://thawing-fortress-74054.herokuapp.com/book/'+book_id,
     };
 
     request(options, function (error, response, body) {
@@ -229,12 +229,12 @@ else{var books=[];}
     if (by=="specials") {
       var limit=9;
       var options = { method: 'GET',
-      url: 'http://localhost:8080/book/'+limit+'/'+by+'/'+offset_value
+      url: 'https://thawing-fortress-74054.herokuapp.com/book/'+limit+'/'+by+'/'+offset_value
       };
     }
     else{
       var options = { method: 'GET',
-      url: 'http://localhost:8080/book/'+offset_value+'/'+by
+      url: 'https://thawing-fortress-74054.herokuapp.com/book/'+offset_value+'/'+by
       };
     }
     //console.log(by);
@@ -311,7 +311,7 @@ else{var books=[];}
           offset_value=((offset-1)*9);
         }
           var options = { method: 'GET',
-          url: 'http://localhost:8080/book/'+offset_value+'/'+by_type_or_genre+'/'+by_val
+          url: 'https://thawing-fortress-74054.herokuapp.com/book/'+offset_value+'/'+by_type_or_genre+'/'+by_val
           };
       request(options, function (error, response, body) {
       if (error) throw new Error(error);
@@ -363,7 +363,7 @@ router.get('/user/cart_display',function (req,res,next) {
       var user=req.user;
       console.log(user);
         var options = { method: 'GET',
-          url: 'http://localhost:8080/book/cart/cart_display',
+          url: 'https://thawing-fortress-74054.herokuapp.com/book/cart/cart_display',
           headers:
            {
              'cache-control': 'no-cache',
@@ -453,7 +453,7 @@ form.parse(req)
           newarr.splice(11, 0, 'false');
           console.log(newarr);
           var options = { method: 'GET',
-            url: 'http://localhost:8080/book/book/add_book',
+            url: 'https://thawing-fortress-74054.herokuapp.com/book/book/add_book',
             headers:
              {
                'cache-control': 'no-cache',
