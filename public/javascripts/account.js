@@ -2,7 +2,7 @@ function wishlist() {
   var settings = {
 "async": true,
 "crossDomain": true,
-"url": "http://localhost:8080/book/wishlist/wishlist_display",
+"url": "https://thawing-fortress-74054.herokuapp.com/book/wishlist/wishlist_display",
 "method": "GET",
 "headers": {
   "content-type": "application/json",
@@ -60,7 +60,7 @@ function account() {
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://localhost:8080/auth/account/display_account_info",
+    "url": "https://thawing-fortress-74054.herokuapp.com/auth/account/display_account_info",
     "method": "GET",
     "headers": {
       "cache-control": "no-cache",
@@ -160,7 +160,7 @@ function render_form(data) {
       e.preventDefault();
       $.ajax({
        type: "POST",
-        url: "http://localhost:8080/auth/account/update_info",
+        url: "https://thawing-fortress-74054.herokuapp.com/auth/account/update_info",
         data: $(this).serialize(),
         success: function(response) {
           data=response.data;
@@ -185,7 +185,7 @@ function render_form(data) {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://localhost:8080/book/sale/sale_display",
+      "url": "https://thawing-fortress-74054.herokuapp.com/book/sale/sale_display",
       "method": "GET",
       "headers": {
         "cache-control": "no-cache",
@@ -246,7 +246,7 @@ function remove_from_wishlist(book_id){
   var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://localhost:8080/book/remove_from/wishlist/"+book_id,
+  "url": "https://thawing-fortress-74054.herokuapp.com/book/remove_from/wishlist/"+book_id,
   "method": "GET",
   "headers": {
     "cache-control": "no-cache"
@@ -262,7 +262,7 @@ function add_to_cart_wishlist(book_id){
   var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://localhost:8080/book/remove_from/wishlist/"+book_id,
+  "url": "https://thawing-fortress-74054.herokuapp.com/book/remove_from/wishlist/"+book_id,
   "method": "GET",
   "headers": {
     "cache-control": "no-cache"
@@ -274,7 +274,7 @@ $.ajax(settings).done(function (response) {
         var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://localhost:8080/book/add_to_cart/"+book_id,
+        "url": "https://thawing-fortress-74054.herokuapp.com/book/add_to_cart/"+book_id,
         "method": "GET",
         "headers": {
           "cache-control": "no-cache",
@@ -292,7 +292,7 @@ function del_book(book_id) {
   var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://localhost:8080/book/delete/"+book_id,
+  "url": "https://thawing-fortress-74054.herokuapp.com/book/delete/"+book_id,
   "method": "DELETE",
   "headers": {
     "cache-control": "no-cache",
