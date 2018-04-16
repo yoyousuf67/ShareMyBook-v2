@@ -201,10 +201,10 @@ router.get('/add_to_cart/:bookId',function (req,res,next) {
 });
 
 
-//set image
-router.get('images/smblogo2.PNG',function (req,res,next) {
-  res.sendFile("./public/images/smblogo2.PNG");
-});
+// //set image
+// router.get('images/smblogo2.PNG',function (req,res,next) {
+//   res.sendFile("./public/images/smblogo2.PNG");
+// });
 
 //display_cart functionality
 router.get('/cart/cart_display',function (req,res,next) {
