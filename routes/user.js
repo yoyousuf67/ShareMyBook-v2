@@ -241,6 +241,7 @@ else{var books=[];}
     //console.log(offset);
   request(options, function (error, response, body) {
   if (error) throw new Error(error);
+  console.log(body);
   var arr=[]
   newproduct=JSON.parse(body);
   newproduct.data=remove_own_data(cart_detail,wishlist_detail,books,newproduct);
@@ -253,23 +254,7 @@ else{var books=[];}
   }else {
     active_value=offset_value;
   }
-  // for (var i = 0; i < cart_detail.length; i++) {
-  //   for (var j = 0; j < newproduct.data.length; j++) {
-  //     if(cart_detail[i]==newproduct.data[j].book_id)
-  //       newproduct.data.splice(j,1);
-  //   }
-  // }
-  // console.log("after new cart"+newproduct.data);
-  // for (var i = 0; i < wishlist_detail.length; i++) {
-  //   console.log("i"+wishlist_detail.length);
-  //   console.log("here");
-  //   for (var j = 0; j < newproduct.data.length; j++) {
-  //     if(wishlist_detail[i]==newproduct.data[j].book_id){
-  //       newproduct.data.splice(j,1);
-  //       //console.log("jump");
-  //     }
-  //   }
-  // }
+
     res.render('show_sorted_books',{sortedproducts:newproduct.data,datalen:arr,by_type:by,active:active_value,cart_num:cart_len});
   });}
     });
