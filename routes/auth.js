@@ -55,6 +55,8 @@ router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
 });
 
 router.get('/testbase', (req, res, next) => {
+  console.log("yo");
+  console.log(process.env.USER);
   db.any('Select * from account_info')
   .then(function(data) {
     res.status(200).json({
