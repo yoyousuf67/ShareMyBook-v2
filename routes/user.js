@@ -22,6 +22,24 @@ router.get('/',function(req, res, next) {
 
       });
 
+      router.get('/contact_us',function(req, res, next) {
+        if(!req.user){
+            res.redirect('/');
+          }
+          else{
+          res.render('contact_us');
+          }
+            });
+
+      router.get('/about_us',function(req, res, next) {
+              if(!req.user){
+                res.redirect('/');
+              }
+              else{
+              res.render('about_us');
+              }
+                });
+                
 router.get('/register/:type?',function(req, res, next) {
     var type=req.params.type;
     if(req.user){
